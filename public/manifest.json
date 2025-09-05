@@ -1,0 +1,21 @@
+{
+  "name": "Tsunami Alert System",
+  "short_name": "Tsunami Alert",
+  "description": "Early Warning System for Tsunami Detection and Monitoring",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#0ea5e9",
+  "icons": [
+    {
+      "src": "/favicon-16x16.png",
+      "sizes": "16x16",
+      "type": "image/png"
+    },
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}

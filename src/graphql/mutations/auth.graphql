@@ -1,0 +1,93 @@
+mutation GoogleAuth($input: GoogleAuthInput!) {
+  googleAuth(input: $input) {
+    token
+    refreshToken
+    user {
+      id
+      email
+      name
+      avatar
+      role
+      isActive
+      preferences {
+        alertTypes
+        regions
+        emailNotifications
+        smsNotifications
+        pushNotifications
+      }
+      createdAt
+      updatedAt
+    }
+    expiresIn
+  }
+}
+
+mutation RefreshToken($refreshToken: String!) {
+  refreshToken(refreshToken: $refreshToken) {
+    token
+    refreshToken
+    user {
+      id
+      email
+      name
+      avatar
+      role
+      isActive
+      preferences {
+        alertTypes
+        regions
+        emailNotifications
+        smsNotifications
+        pushNotifications
+      }
+      createdAt
+      updatedAt
+    }
+    expiresIn
+  }
+}
+
+mutation Logout {
+  logout
+}
+
+mutation UpdateUserPreferences($preferences: UserPreferencesInput!) {
+  updateUserPreferences(preferences: $preferences) {
+    id
+    email
+    name
+    avatar
+    role
+    isActive
+    preferences {
+      alertTypes
+      regions
+      emailNotifications
+      smsNotifications
+      pushNotifications
+    }
+    createdAt
+    updatedAt
+  }
+}
+
+mutation UpdateProfile($name: String, $avatar: String) {
+  updateProfile(name: $name, avatar: $avatar) {
+    id
+    email
+    name
+    avatar
+    role
+    isActive
+    preferences {
+      alertTypes
+      regions
+      emailNotifications
+      smsNotifications
+      pushNotifications
+    }
+    createdAt
+    updatedAt
+  }
+}

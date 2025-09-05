@@ -1,0 +1,90 @@
+query GetGPSReadings($filter: GPSReadingFilter, $pagination: PaginationInput) {
+  gpsReadings(filter: $filter, pagination: $pagination) {
+    nodes {
+      id
+      stationId
+      station {
+        id
+        stationId
+        name
+        latitude
+        longitude
+        network
+        isActive
+        elevation
+        description
+      }
+      latitude
+      longitude
+      displacementX
+      displacementY
+      displacementZ
+      magnitude
+      quality
+      timestamp
+      metadata
+    }
+    totalCount
+    pageInfo {
+      hasNextPage
+      hasPreviousPage
+      currentPage
+      totalPages
+    }
+  }
+}
+
+query GetGPSStations($isActive: Boolean) {
+  gpsStations(isActive: $isActive) {
+    id
+    stationId
+    name
+    latitude
+    longitude
+    network
+    isActive
+    elevation
+    description
+  }
+}
+
+query GetGPSStation($stationId: String!) {
+  gpsStation(stationId: $stationId) {
+    id
+    stationId
+    name
+    latitude
+    longitude
+    network
+    isActive
+    elevation
+    description
+  }
+}
+
+query GetGPSReading($id: ID!) {
+  gpsReading(id: $id) {
+    id
+    stationId
+    station {
+      id
+      stationId
+      name
+      latitude
+      longitude
+      network
+      isActive
+      elevation
+      description
+    }
+    latitude
+    longitude
+    displacementX
+    displacementY
+    displacementZ
+    magnitude
+    quality
+    timestamp
+    metadata
+  }
+}

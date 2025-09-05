@@ -1,0 +1,259 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+    --primary: 221.2 83.2% 53.3%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 210 40% 96%;
+    --secondary-foreground: 222.2 84% 4.9%;
+    --muted: 210 40% 96%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 210 40% 96%;
+    --accent-foreground: 222.2 84% 4.9%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 221.2 83.2% 53.3%;
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 217.2 91.2% 59.8%;
+    --primary-foreground: 222.2 84% 4.9%;
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 224.3 76.3% 94.1%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* Mapbox GL overrides */
+.mapboxgl-popup {
+  @apply max-w-sm;
+}
+
+.mapboxgl-popup-content {
+  @apply rounded-lg border bg-card p-4 text-card-foreground shadow-lg;
+}
+
+.mapboxgl-popup-close-button {
+  @apply text-muted-foreground hover:text-foreground;
+}
+
+.mapboxgl-ctrl-group {
+  @apply rounded-lg border bg-card shadow-lg;
+}
+
+.mapboxgl-ctrl-group button {
+  @apply bg-transparent text-foreground hover:bg-accent;
+}
+
+/* Custom scrollbars */
+.scrollbar-thin {
+  scrollbar-width: thin;
+  scrollbar-color: hsl(var(--border)) transparent;
+}
+
+.scrollbar-thin::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.scrollbar-thin::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.scrollbar-thin::-webkit-scrollbar-thumb {
+  background: hsl(var(--border));
+  border-radius: 3px;
+}
+
+.scrollbar-thin::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--muted-foreground));
+}
+
+/* Loading animations */
+@keyframes shimmer {
+  0% {
+    background-position: -200px 0;
+  }
+  100% {
+    background-position: calc(200px + 100%) 0;
+  }
+}
+
+.shimmer {
+  background: linear-gradient(
+    90deg,
+    hsl(var(--muted)) 0%,
+    hsl(var(--accent)) 50%,
+    hsl(var(--muted)) 100%
+  );
+  background-size: 200px 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+/* Status indicators */
+.status-safe {
+  @apply bg-green-500 text-green-50;
+}
+
+.status-watch {
+  @apply bg-blue-500 text-blue-50;
+}
+
+.status-warning {
+  @apply bg-yellow-500 text-yellow-50;
+}
+
+.status-alert {
+  @apply bg-red-500 text-red-50 animate-pulse;
+}
+
+/* GPS station markers */
+.gps-marker {
+  @apply rounded-full border-2 border-white shadow-lg transition-all duration-200 hover:scale-110;
+}
+
+.gps-marker.normal {
+  @apply bg-green-500;
+}
+
+.gps-marker.elevated {
+  @apply bg-yellow-500;
+}
+
+.gps-marker.anomalous {
+  @apply bg-red-500 animate-pulse;
+}
+
+/* Chart styles */
+.recharts-cartesian-axis-tick-value {
+  @apply fill-muted-foreground text-xs;
+}
+
+.recharts-legend-item-text {
+  @apply text-foreground;
+}
+
+/* Alert animations */
+.alert-pulse {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.alert-bounce {
+  animation: bounce 1s infinite;
+}
+
+/* Notification styles */
+.notification-enter {
+  @apply translate-x-full opacity-0;
+}
+
+.notification-enter-active {
+  @apply translate-x-0 opacity-100 transition-all duration-300;
+}
+
+.notification-exit {
+  @apply translate-x-0 opacity-100;
+}
+
+.notification-exit-active {
+  @apply translate-x-full opacity-0 transition-all duration-300;
+}
+
+/* Focus styles */
+.focus-ring {
+  @apply focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2;
+}
+
+/* Print styles */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  
+  body {
+    @apply text-black bg-white;
+  }
+  
+  .mapboxgl-map {
+    @apply grayscale;
+  }
+}
+
+/* Mobile optimizations */
+@media (max-width: 640px) {
+  .mapboxgl-popup {
+    @apply max-w-xs;
+  }
+  
+  .mapboxgl-popup-content {
+    @apply p-3 text-sm;
+  }
+}
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+  .gps-marker {
+    @apply border-4;
+  }
+  
+  .status-safe {
+    @apply bg-green-700;
+  }
+  
+  .status-warning {
+    @apply bg-yellow-700;
+  }
+  
+  .status-alert {
+    @apply bg-red-700;
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .animate-pulse,
+  .animate-bounce,
+  .animate-spin {
+    animation: none;
+  }
+  
+  .transition-all,
+  .transition-colors,
+  .transition-transform {
+    transition: none;
+  }
+}

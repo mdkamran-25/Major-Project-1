@@ -1,0 +1,69 @@
+query GetSystemHealth {
+  systemHealth {
+    id
+    overallStatus
+    components {
+      name
+      status
+      responseTime
+      errorRate
+      lastCheck
+      details
+    }
+    metrics {
+      uptime
+      responseTime
+      dataFreshness
+      errorRate
+      resourceUsage {
+        cpu
+        memory
+        disk
+        network
+      }
+      performanceData {
+        timestamp
+        responseTime
+        cpuUsage
+        memoryUsage
+        activeConnections
+      }
+    }
+    timestamp
+  }
+}
+
+query GetComponentHealth($componentName: String!) {
+  componentHealth(componentName: $componentName) {
+    name
+    status
+    responseTime
+    errorRate
+    lastCheck
+    details
+  }
+}
+
+query GetPerformanceMetrics($hours: Int = 24) {
+  performanceMetrics(hours: $hours) {
+    timestamp
+    responseTime
+    cpuUsage
+    memoryUsage
+    activeConnections
+  }
+}
+
+query GetNotificationHistory($pagination: PaginationInput) {
+  notificationHistory(pagination: $pagination) {
+    id
+    type
+    recipient
+    message
+    status
+    sentAt
+    deliveredAt
+    errorMessage
+    metadata
+  }
+}

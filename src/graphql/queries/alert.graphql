@@ -1,0 +1,72 @@
+query GetCurrentAlertStatus {
+  currentAlertStatus {
+    id
+    status
+    level
+    confidence
+    message
+    region
+    lastUpdated
+    isActive
+    details {
+      anomalyDetected
+      gpsTriggered
+      satelliteTriggered
+      triggeredStations
+      recommendation
+      estimatedImpactTime
+      affectedAreas
+      evacuationZones
+    }
+  }
+}
+
+query GetAlertHistory($pagination: PaginationInput) {
+  alertHistory(pagination: $pagination) {
+    nodes {
+      id
+      alertId
+      status
+      level
+      confidence
+      message
+      region
+      timestamp
+      duration
+      resolved
+      resolvedAt
+    }
+    totalCount
+    pageInfo {
+      hasNextPage
+      hasPreviousPage
+      currentPage
+      totalPages
+    }
+  }
+}
+
+query GetAlertsByRegion($region: String!, $pagination: PaginationInput) {
+  alertsByRegion(region: $region, pagination: $pagination) {
+    nodes {
+      id
+      alertId
+      status
+      level
+      confidence
+      message
+      region
+      timestamp
+      duration
+      resolved
+      resolvedAt
+    }
+    totalCount
+    pageInfo {
+      hasNextPage
+      hasPreviousPage
+      currentPage
+      totalPages
+    }
+  }
+}

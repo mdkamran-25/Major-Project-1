@@ -1,0 +1,19 @@
+query GetMe {
+  me {
+    id
+    email
+    name
+    avatar
+    role
+    isActive
+    preferences {
+      alertTypes
+      regions
+      emailNotifications
+      smsNotifications
+      pushNotifications
+    }
+    createdAt
+    updatedAt
+  }
+}

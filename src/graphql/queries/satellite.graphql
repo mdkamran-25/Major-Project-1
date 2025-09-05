@@ -1,0 +1,89 @@
+query GetSatelliteData($filter: SatelliteDataFilter, $pagination: PaginationInput) {
+  satelliteData(filter: $filter, pagination: $pagination) {
+    nodes {
+      id
+      imageUrl
+      cloudinaryPublicId
+      timestamp
+      region
+      regionBounds
+      regionCenter
+      anomalyScore
+      metadata {
+        satellite
+        resolution
+        polarization
+        processingLevel
+        cloudCover
+        dataSource
+      }
+      processingInfo {
+        baselineComparison
+        anomalyThreshold
+        processingTime
+        algorithm
+      }
+    }
+    totalCount
+    pageInfo {
+      hasNextPage
+      hasPreviousPage
+      currentPage
+      totalPages
+    }
+  }
+}
+
+query GetLatestSatelliteData($region: String) {
+  latestSatelliteData(region: $region) {
+    id
+    imageUrl
+    cloudinaryPublicId
+    timestamp
+    region
+    regionBounds
+    regionCenter
+    anomalyScore
+    metadata {
+      satellite
+      resolution
+      polarization
+      processingLevel
+      cloudCover
+      dataSource
+    }
+    processingInfo {
+      baselineComparison
+      anomalyThreshold
+      processingTime
+      algorithm
+    }
+  }
+}
+
+query GetSatelliteImage($id: ID!) {
+  satelliteImage(id: $id) {
+    id
+    imageUrl
+    cloudinaryPublicId
+    timestamp
+    region
+    regionBounds
+    regionCenter
+    anomalyScore
+    metadata {
+      satellite
+      resolution
+      polarization
+      processingLevel
+      cloudCover
+      dataSource
+    }
+    processingInfo {
+      baselineComparison
+      anomalyThreshold
+      processingTime
+      algorithm
+    }
+  }
+}
