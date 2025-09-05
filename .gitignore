@@ -25,3 +25,4 @@ coverage/
 
 # Ignore typescript build info
 *.tsbuildinfo
+.vercel

@@ -24,7 +24,8 @@ export const metadata: Metadata = {
     default: 'Tsunami Early Warning System',
     template: '%s | Tsunami Alert',
   },
-  description: 'Real-time tsunami monitoring and early warning system with GPS and satellite data analysis.',
+  description:
+    'Real-time tsunami monitoring and early warning system with GPS and satellite data analysis.',
   keywords: [
     'tsunami',
     'early warning',
@@ -87,7 +88,7 @@ export const viewport: Viewport = {
   userScalable: false,
   themeColor: [
     { media: '(prefers-color-scheme: light)', color: 'white' },
-    { media: '(prefers-color-scheme: dark)', color: 'black' },
+    { media: '(prefers-color-scheme: dark)', color: 'white' },
   ],
 };
 
@@ -97,7 +98,7 @@ interface RootLayoutProps {
 
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" className="light" suppressHydrationWarning>
       <head />
       <body
         className={cn(
@@ -108,12 +109,13 @@ export default function RootLayout({ children }: RootLayoutProps) {
       >
         <ThemeProvider
           attribute="class"
-          defaultTheme="system"
-          enableSystem
+          defaultTheme="light"
+          enableSystem={false}
           disableTransitionOnChange
+          forcedTheme="light"
         >
           <Providers>
-            <div className="relative flex min-h-screen flex-col">
+            <div className="relative flex flex-col min-h-screen">
               <main className="flex-1">{children}</main>
             </div>
             <Toaster />
