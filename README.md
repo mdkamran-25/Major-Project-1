@@ -1,6 +1,10 @@
-# 🌊 Tsunami Early Warning System - Next.js Frontend
+# Tsunami Alert System - Frontend
 
-A modern, responsive frontend application built with Next.js 14, TypeScript, and Apollo Client for the Tsunami Early Warning System.
+A Next.js frontend application for the Tsunami Alert MVP system with Firebase authentication and real-time monitoring capabilities.
+
+## Environment Variables Setup
+
+Make sure to configure these environment variables in Vercel dashboard for production deployment.
 
 ## 🚀 Tech Stack
 
