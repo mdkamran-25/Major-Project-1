@@ -25,6 +25,7 @@
   "dependencies": {
     "@apollo/client": "^3.8.8",
     "@apollo/experimental-nextjs-app-support": "^0.11.2",
+    "@firebasegen/default-connector": "file:dataconnect-generated/js/default-connector",
     "@headlessui/react": "^1.7.17",
     "@heroicons/react": "^2.0.18",
     "@hookform/resolvers": "^3.3.2",
