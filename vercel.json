@@ -3,7 +3,6 @@
   "outputDirectory": ".next",
   "installCommand": "npm install --legacy-peer-deps",
   "framework": "nextjs",
-  "regions": ["iad1", "sfo1", "lhr1"],
   "functions": {
     "app/api/**/*.ts": {
       "maxDuration": 30
