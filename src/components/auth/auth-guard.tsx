@@ -1,8 +1,9 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/context/AuthContext';
+import { hasFirebaseConfig } from '@/lib/firebase';
 import { Loader2 } from 'lucide-react';
 
 interface AuthGuardProps {
@@ -18,9 +19,25 @@ export function AuthGuard({
 }: AuthGuardProps) {
   const { user, userProfile, loading } = useAuth();
   const router = useRouter();
+  const [loadingTimeout, setLoadingTimeout] = useState(false);
 
   useEffect(() => {
-    if (!loading) {
+    // Set timeout to prevent infinite loading
+    const timeoutId = setTimeout(() => {
+      setLoadingTimeout(true);
+    }, 3000);
+
+    return () => clearTimeout(timeoutId);
+  }, []);
+
+  useEffect(() => {
+    // If Firebase is not configured, allow access (demo mode)
+    if (!hasFirebaseConfig) {
+      console.warn('🔥 Firebase not configured, allowing access in demo mode');
+      return;
+    }
+
+    if (!loading || loadingTimeout) {
       // Not authenticated
       if (!user) {
         router.replace(redirectTo);
@@ -36,10 +53,15 @@ export function AuthGuard({
         }
       }
     }
-  }, [user, userProfile, loading, router, requiredRoles, redirectTo]);
+  }, [user, userProfile, loading, loadingTimeout, router, requiredRoles, redirectTo]);
 
-  // Show loading while checking authentication
-  if (loading) {
+  // If Firebase is not configured, render children directly (demo mode)
+  if (!hasFirebaseConfig) {
+    return <>{children}</>;
+  }
+
+  // Show loading while checking authentication (with timeout)
+  if (loading && !loadingTimeout) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-background">
         <div className="text-center space-y-4">

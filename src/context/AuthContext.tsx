@@ -8,7 +8,7 @@ import {
   useEffect,
   useState,
 } from 'react';
-import { auth } from '@/lib/firebase';
+import { auth, hasFirebaseConfig } from '@/lib/firebase';
 import { getUserProfile, UserProfile } from '@/lib/firebase-auth';
 
 type AuthContextType = {
@@ -42,10 +42,25 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   };
 
   useEffect(() => {
+    // If Firebase is not properly configured, set loading to false immediately
+    if (!hasFirebaseConfig || !auth) {
+      console.warn('🔥 Firebase not configured, skipping authentication');
+      setLoading(false);
+      return;
+    }
+
+    // Set a timeout to prevent infinite loading
+    const timeoutId: NodeJS.Timeout = setTimeout(() => {
+      console.warn('🔥 Auth state timeout, setting loading to false');
+      setLoading(false);
+    }, 5000); // 5 second timeout
+
     const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
+      clearTimeout(timeoutId); // Clear timeout since we got a response
+      
       setUser(currentUser);
       
-      if (currentUser) {
+      if (currentUser && hasFirebaseConfig) {
         try {
           const profile = await getUserProfile(currentUser.uid);
           setUserProfile(profile);
@@ -60,7 +75,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       setLoading(false);
     });
 
-    return unsubscribe;
+    return () => {
+      clearTimeout(timeoutId);
+      if (unsubscribe) unsubscribe();
+    };
   }, []);
 
   return (

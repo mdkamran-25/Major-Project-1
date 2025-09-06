@@ -4,16 +4,23 @@ import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
 
-// Validate required environment variables
-if (!process.env.NEXT_PUBLIC_FIREBASE_API_KEY) {
-  throw new Error('Missing NEXT_PUBLIC_FIREBASE_API_KEY environment variable');
-}
+// Check if Firebase environment variables are available
+const hasFirebaseConfig = !!(
+  process.env.NEXT_PUBLIC_FIREBASE_API_KEY && 
+  process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID
+);
 
-if (!process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID) {
-  throw new Error('Missing NEXT_PUBLIC_FIREBASE_PROJECT_ID environment variable');
-}
+// Default/fallback Firebase config for development or when env vars are missing
+const defaultFirebaseConfig = {
+  apiKey: "demo-api-key",
+  authDomain: "demo-project.firebaseapp.com",
+  projectId: "demo-project",
+  storageBucket: "demo-project.appspot.com",
+  messagingSenderId: "123456789",
+  appId: "1:123456789:web:demo",
+};
 
-const firebaseConfig = {
+const firebaseConfig = hasFirebaseConfig ? {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
   authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN || `${process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID}.firebaseapp.com`,
   projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
@@ -21,14 +28,31 @@ const firebaseConfig = {
   messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
   appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
   measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID,
-};
+} : defaultFirebaseConfig;
 
 // Initialize Firebase
-const app = initializeApp(firebaseConfig);
+let app: any;
+let auth: any;
+let db: any;
+let storage: any;
 
-// Initialize Firebase services
-export const auth = getAuth(app);
-export const db = getFirestore(app);
-export const storage = getStorage(app);
+try {
+  app = initializeApp(firebaseConfig);
+  auth = getAuth(app);
+  db = getFirestore(app);
+  storage = getStorage(app);
+  
+  if (!hasFirebaseConfig) {
+    console.warn('🔥 Firebase: Using demo configuration. Set environment variables for production.');
+  }
+} catch (error) {
+  console.error('🔥 Firebase initialization failed:', error);
+  // Create mock objects to prevent app crashes
+  auth = null;
+  db = null;
+  storage = null;
+}
 
+// Export Firebase services with null checks
+export { auth, db, storage, hasFirebaseConfig };
 export default app;

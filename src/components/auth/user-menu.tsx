@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/context/AuthContext';
+import { hasFirebaseConfig } from '@/lib/firebase';
 import { logoutUser } from '@/lib/firebase-auth';
 import {
   DropdownMenu,
@@ -31,10 +32,24 @@ export function UserMenu() {
   const router = useRouter();
   const [isLoggingOut, setIsLoggingOut] = useState(false);
 
+  // Create demo user when Firebase is not configured
+  const displayUser = user || (!hasFirebaseConfig ? {
+    displayName: 'Demo User',
+    email: 'demo@tsunami-alert.com',
+    photoURL: null
+  } : null);
+
+  const displayProfile = userProfile || (!hasFirebaseConfig ? {
+    role: 'ADMIN',
+    isActive: true
+  } : null);
+
   const handleLogout = async () => {
     setIsLoggingOut(true);
     try {
-      await logoutUser();
+      if (hasFirebaseConfig && user) {
+        await logoutUser();
+      }
       router.push('/auth/signin');
     } catch (error) {
       console.error('Logout error:', error);
@@ -56,7 +71,8 @@ export function UserMenu() {
     }
   };
 
-  if (!user) {
+  // Show sign in button only if Firebase is configured and no user
+  if (!displayUser) {
     return (
       <Button variant="outline" asChild>
         <a href="/auth/signin">Sign In</a>
@@ -70,11 +86,11 @@ export function UserMenu() {
         <Button variant="ghost" className="relative h-10 w-10 rounded-full">
           <Avatar className="h-10 w-10">
             <AvatarImage 
-              src={user.photoURL || ''} 
-              alt={user.displayName || user.email || 'User'} 
+              src={displayUser.photoURL || ''} 
+              alt={displayUser.displayName || displayUser.email || 'User'} 
             />
             <AvatarFallback className="bg-gradient-to-br from-tsunami-blue-500 to-tsunami-green-500 text-white">
-              {getInitials(user.displayName || user.email || 'U')}
+              {getInitials(displayUser.displayName || displayUser.email || 'U')}
             </AvatarFallback>
           </Avatar>
         </Button>
@@ -85,19 +101,24 @@ export function UserMenu() {
           <div className="flex flex-col space-y-2">
             <div className="flex items-center space-x-2">
               <p className="text-sm font-medium leading-none">
-                {user.displayName || 'User'}
+                {displayUser.displayName || 'User'}
               </p>
-              {userProfile?.role && (
+              {displayProfile?.role && (
                 <Badge 
-                  variant={getRoleBadgeVariant(userProfile.role)}
+                  variant={getRoleBadgeVariant(displayProfile.role)}
                   className="text-xs"
                 >
-                  {userProfile.role}
+                  {displayProfile.role}
+                </Badge>
+              )}
+              {!hasFirebaseConfig && (
+                <Badge variant="outline" className="text-xs text-orange-600 border-orange-300">
+                  DEMO
                 </Badge>
               )}
             </div>
             <p className="text-xs leading-none text-muted-foreground">
-              {user.email}
+              {displayUser.email}
             </p>
           </div>
         </DropdownMenuLabel>
@@ -128,7 +149,7 @@ export function UserMenu() {
           <span>Notifications</span>
         </DropdownMenuItem>
 
-        {userProfile?.role === 'ADMIN' && (
+        {displayProfile?.role === 'ADMIN' && (
           <DropdownMenuItem 
             onClick={() => router.push('/admin')}
             className="cursor-pointer"
