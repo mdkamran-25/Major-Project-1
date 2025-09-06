@@ -166,11 +166,11 @@ export default function SystemHealthPage() {
     }
   };
 
-  const getUsageColor = (usage: number) => {
-    if (usage < 50) return 'bg-green-500';
-    if (usage < 80) return 'bg-yellow-500';
-    return 'bg-red-500';
-  };
+  // const getUsageColor = (usage: number) => {
+  //   if (usage < 50) return 'bg-green-500';
+  //   if (usage < 80) return 'bg-yellow-500';
+  //   return 'bg-red-500';
+  // };
 
   const handleRefresh = async () => {
     setIsRefreshing(true);
@@ -179,8 +179,8 @@ export default function SystemHealthPage() {
     setIsRefreshing(false);
   };
 
-  const handleComponentAction = async (component: string, action: string) => {
-    console.log(`${action} ${component}`);
+  const handleComponentAction = async (_component: string, _action: string) => {
+    // console.log(`${action} ${component}`); // Removed console.log for production
     // Simulate action
     await new Promise(resolve => setTimeout(resolve, 1000));
   };

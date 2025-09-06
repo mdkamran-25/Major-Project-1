@@ -1,6 +1,6 @@
 'use client';
 
-import { Metadata } from 'next';
+// import { Metadata } from 'next'; // Unused import
 import { DashboardLayout } from '@/components/layout/dashboard-layout';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -15,9 +15,9 @@ import {
   Clock,
   Shield,
   Waves,
-  Users,
+  // Users, // Unused import
   Database,
-  Wifi,
+  // Wifi, // Unused import
   Battery
 } from 'lucide-react';
 

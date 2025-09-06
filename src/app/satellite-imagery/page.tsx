@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Image from 'next/image';
 import { DashboardLayout } from '@/components/layout/dashboard-layout';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -321,15 +322,18 @@ export default function SatelliteImageryPage() {
 
                 {/* Image Display */}
                 <div className="relative bg-gray-900 rounded-lg overflow-hidden" style={{ minHeight: '400px' }}>
-                  <img
+                  <Image
                     src={selectedImage.imageUrl}
                     alt="Satellite imagery"
+                    width={800}
+                    height={600}
                     className="w-full h-auto"
                     style={{ 
                       transform: `scale(${zoomLevel / 100})`,
                       transformOrigin: 'center center',
                       transition: 'transform 0.2s ease'
                     }}
+                    priority
                   />
                   
                   {/* Overlay Information */}

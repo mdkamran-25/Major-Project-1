@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import Image from 'next/image';
+// import Image from 'next/image'; // Unused import
 import Link from 'next/link';
 import { useAuth } from '@/context/AuthContext';
 import { registerUser, loginWithGoogle, getAuthErrorMessage } from '@/lib/firebase-auth';
