@@ -58,14 +58,14 @@ export default function SignInPage() {
   };
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-tsunami-blue-50 via-white to-tsunami-green-50 p-4">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-tsunami-blue-50 via-white to-tsunami-green-50 p-4">
       <div className="w-full max-w-md">
-        <Card className="border-0 shadow-2xl">
-          <CardHeader className="space-y-4 text-center">
-            <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br from-tsunami-blue-500 to-tsunami-green-500">
+        <Card className="shadow-2xl border-0">
+          <CardHeader className="text-center space-y-4">
+            <div className="mx-auto w-16 h-16 bg-gradient-to-br from-tsunami-blue-500 to-tsunami-green-500 rounded-full flex items-center justify-center">
               <span className="text-2xl">🌊</span>
             </div>
-            <CardTitle className="bg-gradient-to-r from-tsunami-blue-600 to-tsunami-green-600 bg-clip-text text-2xl font-bold text-transparent">
+            <CardTitle className="text-2xl font-bold bg-gradient-to-r from-tsunami-blue-600 to-tsunami-green-600 bg-clip-text text-transparent">
               Welcome Back
             </CardTitle>
             <CardDescription className="text-base">
@@ -87,12 +87,19 @@ export default function SignInPage() {
               variant="outline"
               onClick={handleGoogleLogin}
               disabled={loading}
-              className="h-12 w-full border-2 text-base font-medium transition-colors hover:bg-gray-50"
+              className="w-full h-12 text-base font-medium border-2 hover:bg-gray-50 transition-colors"
             >
               {loading ? (
                 <Loader2 className="mr-2 h-5 w-5 animate-spin" />
               ) : (
-                <Image src="/google.svg" alt="Google" width={20} height={20} className="mr-3" />
+                <Image
+                  src="/google.svg"
+                  alt="Google"
+                  width={20}
+                  height={20}
+                  className="mr-3"
+                  style={{ width: 'auto', height: 'auto' }}
+                />
               )}
               {loading ? 'Signing in...' : 'Continue with Google'}
             </Button>
@@ -102,7 +109,9 @@ export default function SignInPage() {
                 <Separator className="w-full" />
               </div>
               <div className="relative flex justify-center text-xs uppercase">
-                <span className="bg-white px-2 text-muted-foreground">Or continue with email</span>
+                <span className="bg-white px-2 text-muted-foreground">
+                  Or continue with email
+                </span>
               </div>
             </div>
 
@@ -126,7 +135,7 @@ export default function SignInPage() {
                   <Label htmlFor="password">Password</Label>
                   <Link
                     href="/auth/forgot-password"
-                    className="text-sm font-medium text-tsunami-blue-600 hover:text-tsunami-blue-500"
+                    className="text-sm text-tsunami-blue-600 hover:text-tsunami-blue-500 font-medium"
                   >
                     Forgot password?
                   </Link>
@@ -145,7 +154,7 @@ export default function SignInPage() {
               <Button
                 type="submit"
                 disabled={loading}
-                className="h-12 w-full bg-gradient-to-r from-tsunami-blue-600 to-tsunami-green-600 text-base font-medium text-white hover:from-tsunami-blue-700 hover:to-tsunami-green-700"
+                className="w-full h-12 text-base font-medium bg-gradient-to-r from-tsunami-blue-600 to-tsunami-green-600 hover:from-tsunami-blue-700 hover:to-tsunami-green-700 text-white"
               >
                 {loading ? (
                   <>
@@ -163,7 +172,7 @@ export default function SignInPage() {
                 Don&apos;t have an account?{' '}
                 <Link
                   href="/auth/signup"
-                  className="font-medium text-tsunami-blue-600 hover:text-tsunami-blue-500"
+                  className="text-tsunami-blue-600 hover:text-tsunami-blue-500 font-medium"
                 >
                   Sign up
                 </Link>
