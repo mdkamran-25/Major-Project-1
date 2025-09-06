@@ -12,10 +12,10 @@ interface AuthGuardProps {
   redirectTo?: string;
 }
 
-export function AuthGuard({ 
-  children, 
-  requiredRoles = [], 
-  redirectTo = '/auth/signin' 
+export function AuthGuard({
+  children,
+  requiredRoles = [],
+  redirectTo = '/auth/signin',
 }: AuthGuardProps) {
   const { user, userProfile, loading } = useAuth();
   const router = useRouter();
@@ -63,9 +63,9 @@ export function AuthGuard({
   // Show loading while checking authentication (with timeout)
   if (loading && !loadingTimeout) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-background">
-        <div className="text-center space-y-4">
-          <Loader2 className="h-8 w-8 animate-spin mx-auto text-primary" />
+      <div className="flex min-h-screen items-center justify-center bg-background">
+        <div className="space-y-4 text-center">
+          <Loader2 className="mx-auto h-8 w-8 animate-spin text-primary" />
           <p className="text-muted-foreground">Loading...</p>
         </div>
       </div>
@@ -73,7 +73,10 @@ export function AuthGuard({
   }
 
   // Don't render children if not authenticated or doesn't have required role
-  if (!user || (requiredRoles.length > 0 && userProfile && !requiredRoles.includes(userProfile.role))) {
+  if (
+    !user ||
+    (requiredRoles.length > 0 && userProfile && !requiredRoles.includes(userProfile.role))
+  ) {
     return null;
   }
 
@@ -82,25 +85,13 @@ export function AuthGuard({
 
 // Convenience components for specific roles
 export function AdminGuard({ children }: { children: React.ReactNode }) {
-  return (
-    <AuthGuard requiredRoles={['ADMIN']}>
-      {children}
-    </AuthGuard>
-  );
+  return <AuthGuard requiredRoles={['ADMIN']}>{children}</AuthGuard>;
 }
 
 export function OperatorGuard({ children }: { children: React.ReactNode }) {
-  return (
-    <AuthGuard requiredRoles={['ADMIN', 'OPERATOR']}>
-      {children}
-    </AuthGuard>
-  );
+  return <AuthGuard requiredRoles={['ADMIN', 'OPERATOR']}>{children}</AuthGuard>;
 }
 
 export function ViewerGuard({ children }: { children: React.ReactNode }) {
-  return (
-    <AuthGuard requiredRoles={['ADMIN', 'OPERATOR', 'VIEWER']}>
-      {children}
-    </AuthGuard>
-  );
+  return <AuthGuard requiredRoles={['ADMIN', 'OPERATOR', 'VIEWER']}>{children}</AuthGuard>;
 }

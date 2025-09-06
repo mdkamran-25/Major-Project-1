@@ -7,8 +7,8 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { 
-  Activity, 
+import {
+  Activity,
   Server,
   Database,
   Wifi,
@@ -28,7 +28,7 @@ import {
   Settings,
   Play,
   Square,
-  RotateCcw
+  RotateCcw,
 } from 'lucide-react';
 
 // Mock system health data
@@ -46,8 +46,8 @@ const mockSystemHealth = {
       details: {
         activeConnections: 11,
         dataPoints: 1440,
-        lastError: null
-      }
+        lastError: null,
+      },
     },
     {
       name: 'Satellite Processor',
@@ -58,8 +58,8 @@ const mockSystemHealth = {
       details: {
         imagesProcessed: 48,
         queueSize: 0,
-        lastError: null
-      }
+        lastError: null,
+      },
     },
     {
       name: 'Detection Engine',
@@ -70,8 +70,8 @@ const mockSystemHealth = {
       details: {
         analysisCount: 156,
         confidence: 0.95,
-        lastError: null
-      }
+        lastError: null,
+      },
     },
     {
       name: 'Alert Manager',
@@ -82,8 +82,8 @@ const mockSystemHealth = {
       details: {
         alertsSent: 127,
         deliveryRate: 99.2,
-        lastError: null
-      }
+        lastError: null,
+      },
     },
     {
       name: 'Database',
@@ -94,8 +94,8 @@ const mockSystemHealth = {
       details: {
         connections: 45,
         queries: 2840,
-        lastError: 'Connection timeout at 10:25 UTC'
-      }
+        lastError: 'Connection timeout at 10:25 UTC',
+      },
     },
     {
       name: 'Notification Service',
@@ -106,9 +106,9 @@ const mockSystemHealth = {
       details: {
         messagesSent: 89,
         deliveryRate: 98.9,
-        lastError: null
-      }
-    }
+        lastError: null,
+      },
+    },
   ],
   metrics: {
     uptime: '15d 14h 23m',
@@ -119,17 +119,53 @@ const mockSystemHealth = {
       cpu: 23.5,
       memory: 67.2,
       disk: 78.5,
-      network: 12.3
+      network: 12.3,
     },
     performanceData: [
-      { timestamp: new Date(Date.now() - 6 * 60 * 60 * 1000).toISOString(), responseTime: 380, cpuUsage: 25.1, memoryUsage: 65.8, activeConnections: 42 },
-      { timestamp: new Date(Date.now() - 5 * 60 * 60 * 1000).toISOString(), responseTime: 420, cpuUsage: 28.3, memoryUsage: 68.2, activeConnections: 38 },
-      { timestamp: new Date(Date.now() - 4 * 60 * 60 * 1000).toISOString(), responseTime: 395, cpuUsage: 22.7, memoryUsage: 66.5, activeConnections: 45 },
-      { timestamp: new Date(Date.now() - 3 * 60 * 60 * 1000).toISOString(), responseTime: 445, cpuUsage: 31.2, memoryUsage: 69.1, activeConnections: 41 },
-      { timestamp: new Date(Date.now() - 2 * 60 * 60 * 1000).toISOString(), responseTime: 410, cpuUsage: 26.8, memoryUsage: 67.8, activeConnections: 39 },
-      { timestamp: new Date(Date.now() - 1 * 60 * 60 * 1000).toISOString(), responseTime: 425, cpuUsage: 23.5, memoryUsage: 67.2, activeConnections: 43 }
-    ]
-  }
+      {
+        timestamp: new Date(Date.now() - 6 * 60 * 60 * 1000).toISOString(),
+        responseTime: 380,
+        cpuUsage: 25.1,
+        memoryUsage: 65.8,
+        activeConnections: 42,
+      },
+      {
+        timestamp: new Date(Date.now() - 5 * 60 * 60 * 1000).toISOString(),
+        responseTime: 420,
+        cpuUsage: 28.3,
+        memoryUsage: 68.2,
+        activeConnections: 38,
+      },
+      {
+        timestamp: new Date(Date.now() - 4 * 60 * 60 * 1000).toISOString(),
+        responseTime: 395,
+        cpuUsage: 22.7,
+        memoryUsage: 66.5,
+        activeConnections: 45,
+      },
+      {
+        timestamp: new Date(Date.now() - 3 * 60 * 60 * 1000).toISOString(),
+        responseTime: 445,
+        cpuUsage: 31.2,
+        memoryUsage: 69.1,
+        activeConnections: 41,
+      },
+      {
+        timestamp: new Date(Date.now() - 2 * 60 * 60 * 1000).toISOString(),
+        responseTime: 410,
+        cpuUsage: 26.8,
+        memoryUsage: 67.8,
+        activeConnections: 39,
+      },
+      {
+        timestamp: new Date(Date.now() - 1 * 60 * 60 * 1000).toISOString(),
+        responseTime: 425,
+        cpuUsage: 23.5,
+        memoryUsage: 67.2,
+        activeConnections: 43,
+      },
+    ],
+  },
 };
 
 export default function SystemHealthPage() {
@@ -175,14 +211,14 @@ export default function SystemHealthPage() {
   const handleRefresh = async () => {
     setIsRefreshing(true);
     // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 2000));
+    await new Promise((resolve) => setTimeout(resolve, 2000));
     setIsRefreshing(false);
   };
 
   const handleComponentAction = async (_component: string, _action: string) => {
     // console.log(`${action} ${component}`); // Removed console.log for production
     // Simulate action
-    await new Promise(resolve => setTimeout(resolve, 1000));
+    await new Promise((resolve) => setTimeout(resolve, 1000));
   };
 
   const formatTimeAgo = (timestamp: string) => {
@@ -201,27 +237,20 @@ export default function SystemHealthPage() {
       <div className="p-4 lg:p-8">
         {/* Header */}
         <div className="mb-8">
-          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+          <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
             <div>
-              <h1 className="text-2xl lg:text-3xl font-bold text-gray-900">
-                System Health
-              </h1>
-              <p className="text-gray-600 mt-1">
+              <h1 className="text-2xl font-bold text-gray-900 lg:text-3xl">System Health</h1>
+              <p className="mt-1 text-gray-600">
                 Monitor system components and performance metrics
               </p>
             </div>
             <div className="flex items-center space-x-2">
-              <Button 
-                variant="outline" 
-                size="sm"
-                onClick={handleRefresh}
-                disabled={isRefreshing}
-              >
-                <RefreshCw className={`h-4 w-4 mr-2 ${isRefreshing ? 'animate-spin' : ''}`} />
+              <Button variant="outline" size="sm" onClick={handleRefresh} disabled={isRefreshing}>
+                <RefreshCw className={`mr-2 h-4 w-4 ${isRefreshing ? 'animate-spin' : ''}`} />
                 {isRefreshing ? 'Checking...' : 'Health Check'}
               </Button>
               <Button variant="outline" size="sm">
-                <Settings className="h-4 w-4 mr-2" />
+                <Settings className="mr-2 h-4 w-4" />
                 Configure
               </Button>
             </div>
@@ -231,49 +260,56 @@ export default function SystemHealthPage() {
         {/* Overall Status */}
         <Card className={`mb-8 border-2 ${getStatusColor(mockSystemHealth.overall)}`}>
           <CardContent className="p-6">
-            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+            <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
               <div className="flex items-center space-x-4">
-                <div className="flex-shrink-0">
-                  {getStatusIcon(mockSystemHealth.overall)}
-                </div>
+                <div className="flex-shrink-0">{getStatusIcon(mockSystemHealth.overall)}</div>
                 <div>
                   <div className="flex items-center space-x-3">
-                    <h2 className="text-xl font-bold">
-                      System Status: {mockSystemHealth.overall}
-                    </h2>
+                    <h2 className="text-xl font-bold">System Status: {mockSystemHealth.overall}</h2>
                     <Badge className="bg-green-100 text-green-800">
                       Uptime: {mockSystemHealth.uptime}
                     </Badge>
                   </div>
-                  <p className="text-gray-700 mt-1">
-                    All critical systems operational. Last check: {formatTimeAgo(mockSystemHealth.lastCheck)}
+                  <p className="mt-1 text-gray-700">
+                    All critical systems operational. Last check:{' '}
+                    {formatTimeAgo(mockSystemHealth.lastCheck)}
                   </p>
                 </div>
               </div>
               <div className="text-right">
                 <p className="text-sm text-gray-600">System Uptime</p>
-                <p className="text-2xl font-bold text-green-600">{mockSystemHealth.metrics.uptime}</p>
+                <p className="text-2xl font-bold text-green-600">
+                  {mockSystemHealth.metrics.uptime}
+                </p>
               </div>
             </div>
           </CardContent>
         </Card>
 
         {/* Resource Usage */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+        <div className="mb-8 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
           <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium">CPU Usage</CardTitle>
               <Cpu className="h-4 w-4 text-muted-foreground" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">{mockSystemHealth.metrics.resourceUsage.cpu}%</div>
-              <Progress 
-                value={mockSystemHealth.metrics.resourceUsage.cpu} 
+              <div className="text-2xl font-bold">
+                {mockSystemHealth.metrics.resourceUsage.cpu}%
+              </div>
+              <Progress
+                value={mockSystemHealth.metrics.resourceUsage.cpu}
                 className="mt-2"
-                style={{
-                  '--progress-foreground': mockSystemHealth.metrics.resourceUsage.cpu < 50 ? '#22c55e' : 
-                    mockSystemHealth.metrics.resourceUsage.cpu < 80 ? '#eab308' : '#ef4444'
-                } as React.CSSProperties}
+                style={
+                  {
+                    '--progress-foreground':
+                      mockSystemHealth.metrics.resourceUsage.cpu < 50
+                        ? '#22c55e'
+                        : mockSystemHealth.metrics.resourceUsage.cpu < 80
+                          ? '#eab308'
+                          : '#ef4444',
+                  } as React.CSSProperties
+                }
               />
             </CardContent>
           </Card>
@@ -284,14 +320,22 @@ export default function SystemHealthPage() {
               <MemoryStick className="h-4 w-4 text-muted-foreground" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">{mockSystemHealth.metrics.resourceUsage.memory}%</div>
-              <Progress 
-                value={mockSystemHealth.metrics.resourceUsage.memory} 
+              <div className="text-2xl font-bold">
+                {mockSystemHealth.metrics.resourceUsage.memory}%
+              </div>
+              <Progress
+                value={mockSystemHealth.metrics.resourceUsage.memory}
                 className="mt-2"
-                style={{
-                  '--progress-foreground': mockSystemHealth.metrics.resourceUsage.memory < 50 ? '#22c55e' : 
-                    mockSystemHealth.metrics.resourceUsage.memory < 80 ? '#eab308' : '#ef4444'
-                } as React.CSSProperties}
+                style={
+                  {
+                    '--progress-foreground':
+                      mockSystemHealth.metrics.resourceUsage.memory < 50
+                        ? '#22c55e'
+                        : mockSystemHealth.metrics.resourceUsage.memory < 80
+                          ? '#eab308'
+                          : '#ef4444',
+                  } as React.CSSProperties
+                }
               />
             </CardContent>
           </Card>
@@ -302,14 +346,22 @@ export default function SystemHealthPage() {
               <HardDrive className="h-4 w-4 text-muted-foreground" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">{mockSystemHealth.metrics.resourceUsage.disk}%</div>
-              <Progress 
-                value={mockSystemHealth.metrics.resourceUsage.disk} 
+              <div className="text-2xl font-bold">
+                {mockSystemHealth.metrics.resourceUsage.disk}%
+              </div>
+              <Progress
+                value={mockSystemHealth.metrics.resourceUsage.disk}
                 className="mt-2"
-                style={{
-                  '--progress-foreground': mockSystemHealth.metrics.resourceUsage.disk < 50 ? '#22c55e' : 
-                    mockSystemHealth.metrics.resourceUsage.disk < 80 ? '#eab308' : '#ef4444'
-                } as React.CSSProperties}
+                style={
+                  {
+                    '--progress-foreground':
+                      mockSystemHealth.metrics.resourceUsage.disk < 50
+                        ? '#22c55e'
+                        : mockSystemHealth.metrics.resourceUsage.disk < 80
+                          ? '#eab308'
+                          : '#ef4444',
+                  } as React.CSSProperties
+                }
               />
             </CardContent>
           </Card>
@@ -320,14 +372,22 @@ export default function SystemHealthPage() {
               <Wifi className="h-4 w-4 text-muted-foreground" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">{mockSystemHealth.metrics.resourceUsage.network}%</div>
-              <Progress 
-                value={mockSystemHealth.metrics.resourceUsage.network} 
+              <div className="text-2xl font-bold">
+                {mockSystemHealth.metrics.resourceUsage.network}%
+              </div>
+              <Progress
+                value={mockSystemHealth.metrics.resourceUsage.network}
                 className="mt-2"
-                style={{
-                  '--progress-foreground': mockSystemHealth.metrics.resourceUsage.network < 50 ? '#22c55e' : 
-                    mockSystemHealth.metrics.resourceUsage.network < 80 ? '#eab308' : '#ef4444'
-                } as React.CSSProperties}
+                style={
+                  {
+                    '--progress-foreground':
+                      mockSystemHealth.metrics.resourceUsage.network < 50
+                        ? '#22c55e'
+                        : mockSystemHealth.metrics.resourceUsage.network < 80
+                          ? '#eab308'
+                          : '#ef4444',
+                  } as React.CSSProperties
+                }
               />
             </CardContent>
           </Card>
@@ -342,18 +402,22 @@ export default function SystemHealthPage() {
 
           <TabsContent value="components" className="space-y-6">
             {/* Component Status */}
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
               {mockSystemHealth.components.map((component) => (
-                <Card 
-                  key={component.name} 
+                <Card
+                  key={component.name}
                   className={`cursor-pointer transition-all ${
                     selectedComponent === component.name ? 'ring-2 ring-tsunami-blue-500' : ''
                   }`}
-                  onClick={() => setSelectedComponent(selectedComponent === component.name ? null : component.name)}
+                  onClick={() =>
+                    setSelectedComponent(
+                      selectedComponent === component.name ? null : component.name
+                    )
+                  }
                 >
                   <CardHeader>
                     <div className="flex items-center justify-between">
-                      <CardTitle className="text-lg flex items-center space-x-2">
+                      <CardTitle className="flex items-center space-x-2 text-lg">
                         <Server className="h-5 w-5" />
                         <span>{component.name}</span>
                       </CardTitle>
@@ -365,7 +429,7 @@ export default function SystemHealthPage() {
                       </div>
                     </div>
                   </CardHeader>
-                  
+
                   <CardContent className="space-y-4">
                     <div className="grid grid-cols-2 gap-4 text-sm">
                       <div>
@@ -374,26 +438,32 @@ export default function SystemHealthPage() {
                       </div>
                       <div>
                         <p className="text-gray-500">Error Rate</p>
-                        <p className={`font-medium ${component.errorRate > 1 ? 'text-red-600' : 'text-green-600'}`}>
+                        <p
+                          className={`font-medium ${component.errorRate > 1 ? 'text-red-600' : 'text-green-600'}`}
+                        >
                           {component.errorRate}%
                         </p>
                       </div>
                     </div>
 
-                    <div className="text-xs text-gray-500 flex items-center">
-                      <Clock className="h-3 w-3 mr-1" />
+                    <div className="flex items-center text-xs text-gray-500">
+                      <Clock className="mr-1 h-3 w-3" />
                       Last checked: {formatTimeAgo(component.lastCheck)}
                     </div>
 
                     {selectedComponent === component.name && (
-                      <div className="border-t pt-4 space-y-3">
+                      <div className="space-y-3 border-t pt-4">
                         <div className="space-y-2">
-                          <h4 className="font-medium text-sm">Component Details</h4>
+                          <h4 className="text-sm font-medium">Component Details</h4>
                           <div className="grid grid-cols-1 gap-2 text-xs">
                             {Object.entries(component.details).map(([key, value]) => (
                               <div key={key} className="flex justify-between">
-                                <span className="text-gray-500 capitalize">{key.replace(/([A-Z])/g, ' $1').trim()}:</span>
-                                <span className={`font-medium ${key === 'lastError' && value ? 'text-red-600' : ''}`}>
+                                <span className="capitalize text-gray-500">
+                                  {key.replace(/([A-Z])/g, ' $1').trim()}:
+                                </span>
+                                <span
+                                  className={`font-medium ${key === 'lastError' && value ? 'text-red-600' : ''}`}
+                                >
                                   {value === null ? 'None' : String(value)}
                                 </span>
                               </div>
@@ -410,7 +480,7 @@ export default function SystemHealthPage() {
                               handleComponentAction(component.name, 'restart');
                             }}
                           >
-                            <RotateCcw className="h-3 w-3 mr-1" />
+                            <RotateCcw className="mr-1 h-3 w-3" />
                             Restart
                           </Button>
                           <Button
@@ -421,7 +491,7 @@ export default function SystemHealthPage() {
                               handleComponentAction(component.name, 'stop');
                             }}
                           >
-                            <Square className="h-3 w-3 mr-1" />
+                            <Square className="mr-1 h-3 w-3" />
                             Stop
                           </Button>
                           <Button
@@ -432,7 +502,7 @@ export default function SystemHealthPage() {
                               handleComponentAction(component.name, 'start');
                             }}
                           >
-                            <Play className="h-3 w-3 mr-1" />
+                            <Play className="mr-1 h-3 w-3" />
                             Start
                           </Button>
                         </div>
@@ -445,23 +515,21 @@ export default function SystemHealthPage() {
           </TabsContent>
 
           <TabsContent value="metrics" className="space-y-6">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
               <Card>
                 <CardHeader>
                   <CardTitle className="flex items-center space-x-2">
                     <TrendingUp className="h-5 w-5 text-tsunami-blue-600" />
                     <span>Response Time Trends</span>
                   </CardTitle>
-                  <CardDescription>
-                    System response times over the last 6 hours
-                  </CardDescription>
+                  <CardDescription>System response times over the last 6 hours</CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <div className="w-full h-64 bg-gray-100 rounded-lg flex items-center justify-center">
+                  <div className="flex h-64 w-full items-center justify-center rounded-lg bg-gray-100">
                     <div className="text-center">
-                      <Activity className="h-8 w-8 text-gray-400 mx-auto mb-2" />
+                      <Activity className="mx-auto mb-2 h-8 w-8 text-gray-400" />
                       <p className="text-gray-500">Response time chart</p>
-                      <p className="text-xs text-gray-400 mt-1">Real-time performance monitoring</p>
+                      <p className="mt-1 text-xs text-gray-400">Real-time performance monitoring</p>
                     </div>
                   </div>
                 </CardContent>
@@ -473,16 +541,14 @@ export default function SystemHealthPage() {
                     <Cpu className="h-5 w-5 text-tsunami-green-600" />
                     <span>Resource Usage</span>
                   </CardTitle>
-                  <CardDescription>
-                    CPU and memory usage over time
-                  </CardDescription>
+                  <CardDescription>CPU and memory usage over time</CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <div className="w-full h-64 bg-gray-100 rounded-lg flex items-center justify-center">
+                  <div className="flex h-64 w-full items-center justify-center rounded-lg bg-gray-100">
                     <div className="text-center">
-                      <MemoryStick className="h-8 w-8 text-gray-400 mx-auto mb-2" />
+                      <MemoryStick className="mx-auto mb-2 h-8 w-8 text-gray-400" />
                       <p className="text-gray-500">Resource usage chart</p>
-                      <p className="text-xs text-gray-400 mt-1">System resource monitoring</p>
+                      <p className="mt-1 text-xs text-gray-400">System resource monitoring</p>
                     </div>
                   </div>
                 </CardContent>
@@ -493,20 +559,20 @@ export default function SystemHealthPage() {
             <Card>
               <CardHeader>
                 <CardTitle>Performance Summary</CardTitle>
-                <CardDescription>
-                  Key performance indicators and system metrics
-                </CardDescription>
+                <CardDescription>Key performance indicators and system metrics</CardDescription>
               </CardHeader>
               <CardContent>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
                   <div className="space-y-2">
                     <div className="flex items-center space-x-2">
                       <Zap className="h-4 w-4 text-yellow-500" />
                       <span className="text-sm font-medium">Avg Response Time</span>
                     </div>
-                    <div className="text-2xl font-bold">{mockSystemHealth.metrics.responseTime}ms</div>
+                    <div className="text-2xl font-bold">
+                      {mockSystemHealth.metrics.responseTime}ms
+                    </div>
                     <div className="flex items-center text-xs text-green-600">
-                      <TrendingDown className="h-3 w-3 mr-1" />
+                      <TrendingDown className="mr-1 h-3 w-3" />
                       -12% from yesterday
                     </div>
                   </div>
@@ -516,9 +582,11 @@ export default function SystemHealthPage() {
                       <Database className="h-4 w-4 text-blue-500" />
                       <span className="text-sm font-medium">Data Freshness</span>
                     </div>
-                    <div className="text-2xl font-bold">{mockSystemHealth.metrics.dataFreshness}min</div>
+                    <div className="text-2xl font-bold">
+                      {mockSystemHealth.metrics.dataFreshness}min
+                    </div>
                     <div className="flex items-center text-xs text-green-600">
-                      <CheckCircle className="h-3 w-3 mr-1" />
+                      <CheckCircle className="mr-1 h-3 w-3" />
                       Within target
                     </div>
                   </div>
@@ -530,7 +598,7 @@ export default function SystemHealthPage() {
                     </div>
                     <div className="text-2xl font-bold">{mockSystemHealth.metrics.errorRate}%</div>
                     <div className="flex items-center text-xs text-green-600">
-                      <TrendingDown className="h-3 w-3 mr-1" />
+                      <TrendingDown className="mr-1 h-3 w-3" />
                       -0.2% from yesterday
                     </div>
                   </div>
@@ -542,7 +610,7 @@ export default function SystemHealthPage() {
                     </div>
                     <div className="text-2xl font-bold">99.8%</div>
                     <div className="flex items-center text-xs text-green-600">
-                      <CheckCircle className="h-3 w-3 mr-1" />
+                      <CheckCircle className="mr-1 h-3 w-3" />
                       Above target
                     </div>
                   </div>
@@ -555,28 +623,61 @@ export default function SystemHealthPage() {
             <Card>
               <CardHeader>
                 <CardTitle>Recent System Events</CardTitle>
-                <CardDescription>
-                  Latest system logs and events
-                </CardDescription>
+                <CardDescription>Latest system logs and events</CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="space-y-3">
                   {[
-                    { time: '10:45:23', level: 'INFO', component: 'GPS Fetcher', message: 'Successfully updated data from 11 stations' },
-                    { time: '10:43:15', level: 'WARN', component: 'Database', message: 'Connection timeout detected, retrying...' },
-                    { time: '10:42:08', level: 'INFO', component: 'Alert Manager', message: 'Alert notification sent successfully' },
-                    { time: '10:40:32', level: 'INFO', component: 'Satellite Processor', message: 'Image analysis completed in 2.1s' },
-                    { time: '10:38:45', level: 'ERROR', component: 'Database', message: 'Query timeout after 30s' },
-                    { time: '10:35:12', level: 'INFO', component: 'System Health', message: 'Health check completed successfully' }
+                    {
+                      time: '10:45:23',
+                      level: 'INFO',
+                      component: 'GPS Fetcher',
+                      message: 'Successfully updated data from 11 stations',
+                    },
+                    {
+                      time: '10:43:15',
+                      level: 'WARN',
+                      component: 'Database',
+                      message: 'Connection timeout detected, retrying...',
+                    },
+                    {
+                      time: '10:42:08',
+                      level: 'INFO',
+                      component: 'Alert Manager',
+                      message: 'Alert notification sent successfully',
+                    },
+                    {
+                      time: '10:40:32',
+                      level: 'INFO',
+                      component: 'Satellite Processor',
+                      message: 'Image analysis completed in 2.1s',
+                    },
+                    {
+                      time: '10:38:45',
+                      level: 'ERROR',
+                      component: 'Database',
+                      message: 'Query timeout after 30s',
+                    },
+                    {
+                      time: '10:35:12',
+                      level: 'INFO',
+                      component: 'System Health',
+                      message: 'Health check completed successfully',
+                    },
                   ].map((log, index) => (
-                    <div key={index} className="flex items-start space-x-4 p-3 border rounded-lg">
-                      <div className="text-xs text-gray-500 font-mono w-20 flex-shrink-0">
+                    <div key={index} className="flex items-start space-x-4 rounded-lg border p-3">
+                      <div className="w-20 flex-shrink-0 font-mono text-xs text-gray-500">
                         {log.time}
                       </div>
                       <div className="flex-shrink-0">
-                        <Badge 
-                          variant={log.level === 'ERROR' ? 'destructive' : 
-                                  log.level === 'WARN' ? 'secondary' : 'default'}
+                        <Badge
+                          variant={
+                            log.level === 'ERROR'
+                              ? 'destructive'
+                              : log.level === 'WARN'
+                                ? 'secondary'
+                                : 'default'
+                          }
                           className="text-xs"
                         >
                           {log.level}
@@ -584,18 +685,16 @@ export default function SystemHealthPage() {
                       </div>
                       <div className="flex-1">
                         <div className="flex items-center space-x-2">
-                          <span className="font-medium text-sm">{log.component}</span>
+                          <span className="text-sm font-medium">{log.component}</span>
                         </div>
-                        <p className="text-sm text-gray-600 mt-1">{log.message}</p>
+                        <p className="mt-1 text-sm text-gray-600">{log.message}</p>
                       </div>
                     </div>
                   ))}
                 </div>
 
-                <div className="flex justify-center mt-6">
-                  <Button variant="outline">
-                    Load More Logs
-                  </Button>
+                <div className="mt-6 flex justify-center">
+                  <Button variant="outline">Load More Logs</Button>
                 </div>
               </CardContent>
             </Card>

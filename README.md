@@ -1,6 +1,7 @@
 # Tsunami Alert System - Frontend
 
-A Next.js frontend application for the Tsunami Alert MVP system with Firebase authentication and real-time monitoring capabilities.
+A Next.js frontend application for the Tsunami Alert MVP system with Firebase authentication and
+real-time monitoring capabilities.
 
 ## Environment Variables Setup
 
@@ -8,21 +9,21 @@ Make sure to configure these environment variables in Vercel dashboard for produ
 
 ## 🚀 Tech Stack
 
-| Layer/Feature | Technology/Tool |
-|---------------|----------------|
-| **Framework** | Next.js 14 (App Router, SSR/SSG/ISR) |
-| **Language** | TypeScript |
-| **Styling** | Tailwind CSS, PostCSS |
-| **UI Components** | Custom components (Atomic Design), Shadcn/ui |
-| **State Management** | React Context API, Zustand |
-| **GraphQL** | Apollo Client, GraphQL Code Generator |
-| **Authentication** | NextAuth.js with Google OAuth |
-| **Maps** | Mapbox GL JS, React Map GL |
-| **Image Management** | Cloudinary, Next/Image |
-| **Testing** | Jest, React Testing Library, Playwright |
-| **Linting/Format** | ESLint, Prettier, lint-staged, Husky |
-| **CI/CD** | GitHub Actions |
-| **Deployment** | Vercel |
+| Layer/Feature        | Technology/Tool                              |
+| -------------------- | -------------------------------------------- |
+| **Framework**        | Next.js 14 (App Router, SSR/SSG/ISR)         |
+| **Language**         | TypeScript                                   |
+| **Styling**          | Tailwind CSS, PostCSS                        |
+| **UI Components**    | Custom components (Atomic Design), Shadcn/ui |
+| **State Management** | React Context API, Zustand                   |
+| **GraphQL**          | Apollo Client, GraphQL Code Generator        |
+| **Authentication**   | NextAuth.js with Google OAuth                |
+| **Maps**             | Mapbox GL JS, React Map GL                   |
+| **Image Management** | Cloudinary, Next/Image                       |
+| **Testing**          | Jest, React Testing Library, Playwright      |
+| **Linting/Format**   | ESLint, Prettier, lint-staged, Husky         |
+| **CI/CD**            | GitHub Actions                               |
+| **Deployment**       | Vercel                                       |
 
 ## 📁 Project Structure
 
@@ -61,7 +62,7 @@ src/
 
 ### Prerequisites
 
-- Node.js 18+ 
+- Node.js 18+
 - npm 8+
 - Git
 
@@ -127,16 +128,19 @@ npm start
 The component library follows Atomic Design principles:
 
 #### **Atoms** (Basic building blocks)
+
 - `Button`, `Input`, `Badge`, `Avatar`
 - `Card`, `Dialog`, `Tooltip`, `Spinner`
 
 #### **Molecules** (Simple combinations)
+
 - `AlertStatusCard` - Displays current alert status
 - `GPSStationMarker` - GPS station on map
 - `DataOverview` - Statistics cards
 - `UserMenu` - Profile dropdown
 
 #### **Organisms** (Complex components)
+
 - `MapDashboard` - Interactive Mapbox map
 - `DashboardLayout` - Main layout with navigation
 - `AlertHistory` - Alert timeline
@@ -203,7 +207,7 @@ npm run codegen:watch
 // Real-time alert updates
 const AlertStatus = () => {
   const { data } = useAlertStatusUpdatedSubscription();
-  
+
   return (
     <div className={`alert-${data?.alertStatusUpdated.status.toLowerCase()}`}>
       {data?.alertStatusUpdated.message}
@@ -228,17 +232,13 @@ function MapDashboard() {
       initialViewState={{
         longitude: -122.4194,
         latitude: 37.7749,
-        zoom: 8
+        zoom: 8,
       }}
       style={{ width: '100%', height: '500px' }}
       mapStyle="mapbox://styles/mapbox/satellite-v9"
     >
-      {gpsStations.map(station => (
-        <Marker
-          key={station.id}
-          longitude={station.longitude}
-          latitude={station.latitude}
-        >
+      {gpsStations.map((station) => (
+        <Marker key={station.id} longitude={station.longitude} latitude={station.latitude}>
           <GPSStationMarker station={station} />
         </Marker>
       ))}
@@ -265,22 +265,14 @@ import { signIn, signOut, useSession } from 'next-auth/react';
 
 function AuthButton() {
   const { data: session, status } = useSession();
-  
+
   if (status === 'loading') return <Spinner />;
-  
+
   if (session) {
-    return (
-      <Button onClick={() => signOut()}>
-        Sign out {session.user.name}
-      </Button>
-    );
+    return <Button onClick={() => signOut()}>Sign out {session.user.name}</Button>;
   }
-  
-  return (
-    <Button onClick={() => signIn('google')}>
-      Sign in with Google
-    </Button>
-  );
+
+  return <Button onClick={() => signIn('google')}>Sign in with Google</Button>;
 }
 ```
 
@@ -290,11 +282,11 @@ function AuthButton() {
 // Component with role-based rendering
 function AdminPanel() {
   const { data: session } = useSession();
-  
+
   if (session?.user?.role !== 'ADMIN') {
     return <div>Access denied</div>;
   }
-  
+
   return <AdminDashboard />;
 }
 ```
@@ -354,9 +346,9 @@ import { AlertStatusCard } from './AlertStatusCard';
 
 test('displays alert status correctly', () => {
   const mockAlert = createMockAlertStatus();
-  
+
   render(<AlertStatusCard alert={mockAlert} />);
-  
+
   expect(screen.getByText('SAFE')).toBeInTheDocument();
   expect(screen.getByText('All systems normal')).toBeInTheDocument();
 });
@@ -381,7 +373,7 @@ test('loads and displays alert status', async () => {
       <AlertDashboard />
     </MockedProvider>
   );
-  
+
   await waitFor(() => {
     expect(screen.getByText('SAFE')).toBeInTheDocument();
   });
@@ -396,7 +388,7 @@ import { test, expect } from '@playwright/test';
 
 test('dashboard loads and displays alert status', async ({ page }) => {
   await page.goto('/dashboard');
-  
+
   await expect(page.locator('[data-testid="alert-status"]')).toBeVisible();
   await expect(page.locator('[data-testid="map-dashboard"]')).toBeVisible();
 });
@@ -534,12 +526,14 @@ function usePerformanceMonitor() {
 ## 🎯 Key Features
 
 ### 🚨 **Real-time Alert System**
+
 - Live alert status updates via GraphQL subscriptions
 - Color-coded alert levels (Safe, Watch, Warning, Alert)
 - Push notifications for critical alerts
 - Alert history and timeline
 
 ### 🗺️ **Interactive Map Dashboard**
+
 - Mapbox GL JS integration with custom styling
 - Real-time GPS station markers with status indicators
 - Satellite imagery overlays
@@ -547,18 +541,21 @@ function usePerformanceMonitor() {
 - Zoom and pan controls with region selection
 
 ### 📊 **Data Visualization**
+
 - Real-time GPS displacement charts
 - Satellite anomaly score visualization
 - System health metrics dashboard
 - Historical data trends and analysis
 
 ### 👤 **User Management**
+
 - Google OAuth authentication
 - Role-based access control (Admin, Operator, Viewer)
 - User preferences and notification settings
 - Profile management
 
 ### 📱 **Responsive Design**
+
 - Mobile-first responsive design
 - Touch-friendly interface for tablets
 - Progressive Web App (PWA) capabilities

@@ -8,9 +8,9 @@ import {
   updateProfile,
   User,
   UserCredential,
-} from "firebase/auth";
-import { doc, setDoc, getDoc, updateDoc, serverTimestamp } from "firebase/firestore";
-import { auth, db } from "./firebase";
+} from 'firebase/auth';
+import { doc, setDoc, getDoc, updateDoc, serverTimestamp } from 'firebase/firestore';
+import { auth, db } from './firebase';
 
 // Types
 export interface UserProfile {
@@ -40,11 +40,7 @@ googleProvider.addScope('email');
 googleProvider.addScope('profile');
 
 // Email/Password Authentication
-export async function registerUser(
-  email: string,
-  password: string,
-  name: string
-): Promise<User> {
+export async function registerUser(email: string, password: string, name: string): Promise<User> {
   try {
     const userCredential = await createUserWithEmailAndPassword(auth, email, password);
     const user = userCredential.user;
@@ -112,7 +108,7 @@ export async function createUserProfile(
   additionalData?: { displayName?: string }
 ): Promise<void> {
   const userRef = doc(db, 'users', user.uid);
-  
+
   const defaultPreferences = {
     alertTypes: ['HIGH', 'CRITICAL'],
     regions: ['Pacific Northwest'],
@@ -155,10 +151,7 @@ export async function getUserProfile(uid: string): Promise<UserProfile | null> {
   }
 }
 
-export async function updateUserProfile(
-  uid: string,
-  updates: Partial<UserProfile>
-): Promise<void> {
+export async function updateUserProfile(uid: string, updates: Partial<UserProfile>): Promise<void> {
   try {
     const userRef = doc(db, 'users', uid);
     await updateDoc(userRef, {

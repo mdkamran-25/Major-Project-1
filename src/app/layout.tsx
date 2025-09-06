@@ -115,7 +115,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
           forcedTheme="light"
         >
           <Providers>
-            <div className="relative flex flex-col min-h-screen">
+            <div className="relative flex min-h-screen flex-col">
               <main className="flex-1">{children}</main>
             </div>
             <Toaster />

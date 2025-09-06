@@ -6,11 +6,7 @@ const config: CodegenConfig = {
   documents: ['src/**/*.{ts,tsx,graphql,gql}', '!src/types/generated.ts'],
   generates: {
     'src/types/generated.ts': {
-      plugins: [
-        'typescript',
-        'typescript-operations',
-        'typescript-react-apollo',
-      ],
+      plugins: ['typescript', 'typescript-operations', 'typescript-react-apollo'],
       config: {
         withHooks: true,
         withHOC: false,

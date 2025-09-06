@@ -39,13 +39,6 @@
     "allowUnreachableCode": false,
     "exactOptionalPropertyTypes": false
   },
-  "include": [
-    "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx",
-    ".next/types/**/*.ts",
-    "src/**/*",
-    "**/*.graphql"
-  ],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/**/*", "**/*.graphql"],
   "exclude": ["node_modules", ".next", "out", "dist"]
 }

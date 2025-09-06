@@ -9,7 +9,7 @@ import { UserMenu } from '@/components/auth/user-menu';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { CompactStatusIndicator } from '@/components/realtime/status-indicator';
-import { 
+import {
   Home,
   Map,
   Satellite,
@@ -22,7 +22,7 @@ import {
   Bell,
   Menu,
   X,
-  Waves
+  Waves,
 } from 'lucide-react';
 
 const navigationItems = [
@@ -30,38 +30,38 @@ const navigationItems = [
     name: 'Dashboard',
     href: '/dashboard',
     icon: Home,
-    description: 'Overview and status'
+    description: 'Overview and status',
   },
   {
     name: 'GPS Monitoring',
     href: '/gps-monitoring',
     icon: Map,
-    description: 'Real-time GPS data'
+    description: 'Real-time GPS data',
   },
   {
     name: 'Satellite Imagery',
     href: '/satellite-imagery',
     icon: Satellite,
-    description: 'Satellite analysis'
+    description: 'Satellite analysis',
   },
   {
     name: 'Alert Management',
     href: '/alert-management',
     icon: AlertTriangle,
-    description: 'Alert system control'
+    description: 'Alert system control',
   },
   {
     name: 'Analytics',
     href: '/analytics',
     icon: BarChart3,
-    description: 'Data analysis & trends'
+    description: 'Data analysis & trends',
   },
   {
     name: 'System Health',
     href: '/system-health',
     icon: Activity,
-    description: 'System monitoring'
-  }
+    description: 'System monitoring',
+  },
 ];
 
 const userMenuItems = [
@@ -69,26 +69,26 @@ const userMenuItems = [
     name: 'Profile',
     href: '/profile',
     icon: User,
-    roles: ['ADMIN', 'OPERATOR', 'VIEWER']
+    roles: ['ADMIN', 'OPERATOR', 'VIEWER'],
   },
   {
     name: 'Settings',
     href: '/settings',
     icon: Settings,
-    roles: ['ADMIN', 'OPERATOR', 'VIEWER']
+    roles: ['ADMIN', 'OPERATOR', 'VIEWER'],
   },
   {
     name: 'Notifications',
     href: '/notifications',
     icon: Bell,
-    roles: ['ADMIN', 'OPERATOR', 'VIEWER']
+    roles: ['ADMIN', 'OPERATOR', 'VIEWER'],
   },
   {
     name: 'Admin Panel',
     href: '/admin',
     icon: Shield,
-    roles: ['ADMIN']
-  }
+    roles: ['ADMIN'],
+  },
 ];
 
 export function Navigation() {
@@ -110,25 +110,23 @@ export function Navigation() {
   return (
     <>
       {/* Desktop Navigation */}
-      <nav className="hidden lg:flex lg:flex-col lg:w-64 lg:fixed lg:inset-y-0 lg:border-r lg:border-gray-200 lg:bg-white/95 lg:backdrop-blur-sm">
+      <nav className="hidden lg:fixed lg:inset-y-0 lg:flex lg:w-64 lg:flex-col lg:border-r lg:border-gray-200 lg:bg-white/95 lg:backdrop-blur-sm">
         {/* Logo */}
-        <div className="flex items-center h-16 px-6 border-b border-gray-200">
+        <div className="flex h-16 items-center border-b border-gray-200 px-6">
           <div className="flex items-center space-x-3">
-            <div className="w-8 h-8 bg-gradient-to-br from-tsunami-blue-500 to-tsunami-green-500 rounded-full flex items-center justify-center">
+            <div className="flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-br from-tsunami-blue-500 to-tsunami-green-500">
               <Waves className="h-5 w-5 text-white" />
             </div>
             <div>
-              <h1 className="text-lg font-bold text-gray-900">
-                Tsunami Alert
-              </h1>
+              <h1 className="text-lg font-bold text-gray-900">Tsunami Alert</h1>
               <p className="text-xs text-gray-500">Early Warning System</p>
             </div>
           </div>
         </div>
 
         {/* Navigation Links */}
-        <div className="flex-1 flex flex-col overflow-y-auto">
-          <div className="px-4 py-6 space-y-1">
+        <div className="flex flex-1 flex-col overflow-y-auto">
+          <div className="space-y-1 px-4 py-6">
             {navigationItems.map((item) => {
               const Icon = item.icon;
               return (
@@ -136,17 +134,17 @@ export function Navigation() {
                   key={item.name}
                   href={item.href}
                   className={cn(
-                    'group flex items-center px-3 py-2 text-sm font-medium rounded-lg transition-colors',
+                    'group flex items-center rounded-lg px-3 py-2 text-sm font-medium transition-colors',
                     isActive(item.href)
-                      ? 'bg-gradient-to-r from-tsunami-blue-50 to-tsunami-green-50 text-tsunami-blue-700 border border-tsunami-blue-200'
+                      ? 'border border-tsunami-blue-200 bg-gradient-to-r from-tsunami-blue-50 to-tsunami-green-50 text-tsunami-blue-700'
                       : 'text-gray-700 hover:bg-gray-50 hover:text-gray-900'
                   )}
                 >
-                  <Icon 
+                  <Icon
                     className={cn(
                       'mr-3 h-5 w-5 flex-shrink-0',
-                      isActive(item.href) 
-                        ? 'text-tsunami-blue-600' 
+                      isActive(item.href)
+                        ? 'text-tsunami-blue-600'
                         : 'text-gray-400 group-hover:text-gray-600'
                     )}
                   />
@@ -160,31 +158,31 @@ export function Navigation() {
           </div>
 
           {/* User Menu Items */}
-          <div className="px-4 py-4 border-t border-gray-200">
-            <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-3">
+          <div className="border-t border-gray-200 px-4 py-4">
+            <h3 className="mb-3 text-xs font-semibold uppercase tracking-wider text-gray-500">
               Account
             </h3>
             <div className="space-y-1">
               {userMenuItems.map((item) => {
                 if (!hasAccess(item.roles)) return null;
-                
+
                 const Icon = item.icon;
                 return (
                   <Link
                     key={item.name}
                     href={item.href}
                     className={cn(
-                      'group flex items-center px-3 py-2 text-sm font-medium rounded-lg transition-colors',
+                      'group flex items-center rounded-lg px-3 py-2 text-sm font-medium transition-colors',
                       isActive(item.href)
-                        ? 'bg-gradient-to-r from-tsunami-blue-50 to-tsunami-green-50 text-tsunami-blue-700 border border-tsunami-blue-200'
+                        ? 'border border-tsunami-blue-200 bg-gradient-to-r from-tsunami-blue-50 to-tsunami-green-50 text-tsunami-blue-700'
                         : 'text-gray-700 hover:bg-gray-50 hover:text-gray-900'
                     )}
                   >
-                    <Icon 
+                    <Icon
                       className={cn(
                         'mr-3 h-4 w-4 flex-shrink-0',
-                        isActive(item.href) 
-                          ? 'text-tsunami-blue-600' 
+                        isActive(item.href)
+                          ? 'text-tsunami-blue-600'
                           : 'text-gray-400 group-hover:text-gray-600'
                       )}
                     />
@@ -204,16 +202,14 @@ export function Navigation() {
 
       {/* Mobile Navigation Header */}
       <div className="lg:hidden">
-        <div className="flex items-center justify-between h-16 px-4 border-b border-gray-200 bg-white/95 backdrop-blur-sm">
+        <div className="flex h-16 items-center justify-between border-b border-gray-200 bg-white/95 px-4 backdrop-blur-sm">
           <div className="flex items-center space-x-3">
-            <div className="w-8 h-8 bg-gradient-to-br from-tsunami-blue-500 to-tsunami-green-500 rounded-full flex items-center justify-center">
+            <div className="flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-br from-tsunami-blue-500 to-tsunami-green-500">
               <Waves className="h-5 w-5 text-white" />
             </div>
-            <h1 className="text-lg font-bold text-gray-900">
-              Tsunami Alert
-            </h1>
+            <h1 className="text-lg font-bold text-gray-900">Tsunami Alert</h1>
           </div>
-          
+
           <div className="flex items-center space-x-2">
             <CompactStatusIndicator />
             <UserMenu />
@@ -223,11 +219,7 @@ export function Navigation() {
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               className="lg:hidden"
             >
-              {mobileMenuOpen ? (
-                <X className="h-6 w-6" />
-              ) : (
-                <Menu className="h-6 w-6" />
-              )}
+              {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
             </Button>
           </div>
         </div>
@@ -235,7 +227,7 @@ export function Navigation() {
         {/* Mobile Menu */}
         {mobileMenuOpen && (
           <div className="lg:hidden">
-            <div className="px-2 pt-2 pb-3 space-y-1 bg-white border-b border-gray-200">
+            <div className="space-y-1 border-b border-gray-200 bg-white px-2 pb-3 pt-2">
               {navigationItems.map((item) => {
                 const Icon = item.icon;
                 return (
@@ -244,17 +236,17 @@ export function Navigation() {
                     href={item.href}
                     onClick={() => setMobileMenuOpen(false)}
                     className={cn(
-                      'group flex items-center px-3 py-2 text-base font-medium rounded-lg transition-colors',
+                      'group flex items-center rounded-lg px-3 py-2 text-base font-medium transition-colors',
                       isActive(item.href)
-                        ? 'bg-gradient-to-r from-tsunami-blue-50 to-tsunami-green-50 text-tsunami-blue-700 border border-tsunami-blue-200'
+                        ? 'border border-tsunami-blue-200 bg-gradient-to-r from-tsunami-blue-50 to-tsunami-green-50 text-tsunami-blue-700'
                         : 'text-gray-700 hover:bg-gray-50 hover:text-gray-900'
                     )}
                   >
-                    <Icon 
+                    <Icon
                       className={cn(
                         'mr-3 h-5 w-5 flex-shrink-0',
-                        isActive(item.href) 
-                          ? 'text-tsunami-blue-600' 
+                        isActive(item.href)
+                          ? 'text-tsunami-blue-600'
                           : 'text-gray-400 group-hover:text-gray-600'
                       )}
                     />
@@ -268,10 +260,10 @@ export function Navigation() {
             </div>
 
             {/* Mobile User Menu */}
-            <div className="px-2 py-3 space-y-1 bg-gray-50">
+            <div className="space-y-1 bg-gray-50 px-2 py-3">
               {userMenuItems.map((item) => {
                 if (!hasAccess(item.roles)) return null;
-                
+
                 const Icon = item.icon;
                 return (
                   <Link
@@ -279,17 +271,17 @@ export function Navigation() {
                     href={item.href}
                     onClick={() => setMobileMenuOpen(false)}
                     className={cn(
-                      'group flex items-center px-3 py-2 text-sm font-medium rounded-lg transition-colors',
+                      'group flex items-center rounded-lg px-3 py-2 text-sm font-medium transition-colors',
                       isActive(item.href)
-                        ? 'bg-gradient-to-r from-tsunami-blue-50 to-tsunami-green-50 text-tsunami-blue-700 border border-tsunami-blue-200'
+                        ? 'border border-tsunami-blue-200 bg-gradient-to-r from-tsunami-blue-50 to-tsunami-green-50 text-tsunami-blue-700'
                         : 'text-gray-700 hover:bg-gray-50 hover:text-gray-900'
                     )}
                   >
-                    <Icon 
+                    <Icon
                       className={cn(
                         'mr-3 h-4 w-4 flex-shrink-0',
-                        isActive(item.href) 
-                          ? 'text-tsunami-blue-600' 
+                        isActive(item.href)
+                          ? 'text-tsunami-blue-600'
                           : 'text-gray-400 group-hover:text-gray-600'
                       )}
                     />

@@ -7,8 +7,8 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { 
-  Settings as SettingsIcon, 
+import {
+  Settings as SettingsIcon,
   Bell,
   Globe,
   Shield,
@@ -21,7 +21,7 @@ import {
   CheckCircle,
   Monitor,
   Smartphone,
-  Mail
+  Mail,
 } from 'lucide-react';
 
 export default function SettingsPage() {
@@ -33,39 +33,39 @@ export default function SettingsPage() {
     dataRetention: 90,
     timezone: 'America/Vancouver',
     language: 'English',
-    
+
     // Alert Settings
     alertThresholds: {
       low: 30,
       medium: 60,
       high: 85,
-      critical: 95
+      critical: 95,
     },
     alertCooldown: 300,
     autoAcknowledge: false,
-    
+
     // Notification Settings
     emailEnabled: true,
     smsEnabled: true,
     pushEnabled: true,
     webhookEnabled: false,
-    
+
     // API Settings
     apiTimeout: 30,
     maxRetries: 3,
     rateLimitPerMinute: 100,
-    
+
     // Display Settings
     theme: 'system',
     compactMode: false,
     showAnimations: true,
-    highContrast: false
+    highContrast: false,
   });
 
   const handleSave = async () => {
     setIsSaving(true);
     // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 2000));
+    await new Promise((resolve) => setTimeout(resolve, 2000));
     setIsSaving(false);
   };
 
@@ -81,7 +81,7 @@ export default function SettingsPage() {
         low: 30,
         medium: 60,
         high: 85,
-        critical: 95
+        critical: 95,
       },
       alertCooldown: 300,
       autoAcknowledge: false,
@@ -95,7 +95,7 @@ export default function SettingsPage() {
       theme: 'system',
       compactMode: false,
       showAnimations: true,
-      highContrast: false
+      highContrast: false,
     });
   };
 
@@ -104,26 +104,22 @@ export default function SettingsPage() {
       <div className="p-4 lg:p-8">
         {/* Header */}
         <div className="mb-8">
-          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+          <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
             <div>
-              <h1 className="text-2xl lg:text-3xl font-bold text-gray-900">
-                System Settings
-              </h1>
-              <p className="text-gray-600 mt-1">
-                Configure system behavior and preferences
-              </p>
+              <h1 className="text-2xl font-bold text-gray-900 lg:text-3xl">System Settings</h1>
+              <p className="mt-1 text-gray-600">Configure system behavior and preferences</p>
             </div>
             <div className="flex items-center space-x-2">
               <Button variant="outline" onClick={handleReset}>
-                <RefreshCw className="h-4 w-4 mr-2" />
+                <RefreshCw className="mr-2 h-4 w-4" />
                 Reset to Defaults
               </Button>
-              <Button 
+              <Button
                 onClick={handleSave}
                 disabled={isSaving}
                 className="bg-gradient-to-r from-tsunami-blue-600 to-tsunami-green-600"
               >
-                <Save className="h-4 w-4 mr-2" />
+                <Save className="mr-2 h-4 w-4" />
                 {isSaving ? 'Saving...' : 'Save Changes'}
               </Button>
             </div>
@@ -140,16 +136,14 @@ export default function SettingsPage() {
           </TabsList>
 
           <TabsContent value="general" className="space-y-6">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
               <Card>
                 <CardHeader>
                   <CardTitle className="flex items-center space-x-2">
                     <SettingsIcon className="h-5 w-5" />
                     <span>System Configuration</span>
                   </CardTitle>
-                  <CardDescription>
-                    Basic system settings and configuration
-                  </CardDescription>
+                  <CardDescription>Basic system settings and configuration</CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div className="space-y-2">
@@ -169,7 +163,9 @@ export default function SettingsPage() {
                       min="10"
                       max="300"
                       value={settings.refreshInterval}
-                      onChange={(e) => setSettings({ ...settings, refreshInterval: parseInt(e.target.value) })}
+                      onChange={(e) =>
+                        setSettings({ ...settings, refreshInterval: parseInt(e.target.value) })
+                      }
                     />
                     <p className="text-xs text-gray-500">
                       How often to refresh real-time data (10-300 seconds)
@@ -184,7 +180,9 @@ export default function SettingsPage() {
                       min="30"
                       max="365"
                       value={settings.dataRetention}
-                      onChange={(e) => setSettings({ ...settings, dataRetention: parseInt(e.target.value) })}
+                      onChange={(e) =>
+                        setSettings({ ...settings, dataRetention: parseInt(e.target.value) })
+                      }
                     />
                     <p className="text-xs text-gray-500">
                       How long to keep historical data (30-365 days)
@@ -231,9 +229,7 @@ export default function SettingsPage() {
                     <Database className="h-5 w-5" />
                     <span>System Status</span>
                   </CardTitle>
-                  <CardDescription>
-                    Current system configuration and status
-                  </CardDescription>
+                  <CardDescription>Current system configuration and status</CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div className="grid grid-cols-2 gap-4">
@@ -258,22 +254,22 @@ export default function SettingsPage() {
                     </div>
                   </div>
 
-                  <div className="pt-4 border-t">
-                    <h4 className="text-sm font-medium mb-3">System Resources</h4>
+                  <div className="border-t pt-4">
+                    <h4 className="mb-3 text-sm font-medium">System Resources</h4>
                     <div className="space-y-3">
-                      <div className="flex justify-between items-center">
+                      <div className="flex items-center justify-between">
                         <span className="text-sm text-gray-600">CPU Usage</span>
                         <span className="text-sm font-medium">23.5%</span>
                       </div>
-                      <div className="flex justify-between items-center">
+                      <div className="flex items-center justify-between">
                         <span className="text-sm text-gray-600">Memory Usage</span>
                         <span className="text-sm font-medium">67.2%</span>
                       </div>
-                      <div className="flex justify-between items-center">
+                      <div className="flex items-center justify-between">
                         <span className="text-sm text-gray-600">Storage Usage</span>
                         <span className="text-sm font-medium">78.5%</span>
                       </div>
-                      <div className="flex justify-between items-center">
+                      <div className="flex items-center justify-between">
                         <span className="text-sm text-gray-600">Active Connections</span>
                         <span className="text-sm font-medium">43</span>
                       </div>
@@ -285,7 +281,7 @@ export default function SettingsPage() {
           </TabsContent>
 
           <TabsContent value="alerts" className="space-y-6">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
               <Card>
                 <CardHeader>
                   <CardTitle className="flex items-center space-x-2">
@@ -305,13 +301,15 @@ export default function SettingsPage() {
                       min="0"
                       max="100"
                       value={settings.alertThresholds.low}
-                      onChange={(e) => setSettings({
-                        ...settings,
-                        alertThresholds: {
-                          ...settings.alertThresholds,
-                          low: parseInt(e.target.value)
-                        }
-                      })}
+                      onChange={(e) =>
+                        setSettings({
+                          ...settings,
+                          alertThresholds: {
+                            ...settings.alertThresholds,
+                            low: parseInt(e.target.value),
+                          },
+                        })
+                      }
                     />
                   </div>
 
@@ -323,13 +321,15 @@ export default function SettingsPage() {
                       min="0"
                       max="100"
                       value={settings.alertThresholds.medium}
-                      onChange={(e) => setSettings({
-                        ...settings,
-                        alertThresholds: {
-                          ...settings.alertThresholds,
-                          medium: parseInt(e.target.value)
-                        }
-                      })}
+                      onChange={(e) =>
+                        setSettings({
+                          ...settings,
+                          alertThresholds: {
+                            ...settings.alertThresholds,
+                            medium: parseInt(e.target.value),
+                          },
+                        })
+                      }
                     />
                   </div>
 
@@ -341,13 +341,15 @@ export default function SettingsPage() {
                       min="0"
                       max="100"
                       value={settings.alertThresholds.high}
-                      onChange={(e) => setSettings({
-                        ...settings,
-                        alertThresholds: {
-                          ...settings.alertThresholds,
-                          high: parseInt(e.target.value)
-                        }
-                      })}
+                      onChange={(e) =>
+                        setSettings({
+                          ...settings,
+                          alertThresholds: {
+                            ...settings.alertThresholds,
+                            high: parseInt(e.target.value),
+                          },
+                        })
+                      }
                     />
                   </div>
 
@@ -359,13 +361,15 @@ export default function SettingsPage() {
                       min="0"
                       max="100"
                       value={settings.alertThresholds.critical}
-                      onChange={(e) => setSettings({
-                        ...settings,
-                        alertThresholds: {
-                          ...settings.alertThresholds,
-                          critical: parseInt(e.target.value)
-                        }
-                      })}
+                      onChange={(e) =>
+                        setSettings({
+                          ...settings,
+                          alertThresholds: {
+                            ...settings.alertThresholds,
+                            critical: parseInt(e.target.value),
+                          },
+                        })
+                      }
                     />
                   </div>
                 </CardContent>
@@ -377,9 +381,7 @@ export default function SettingsPage() {
                     <Bell className="h-5 w-5" />
                     <span>Alert Behavior</span>
                   </CardTitle>
-                  <CardDescription>
-                    Configure how alerts are handled and processed
-                  </CardDescription>
+                  <CardDescription>Configure how alerts are handled and processed</CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div className="space-y-2">
@@ -390,7 +392,9 @@ export default function SettingsPage() {
                       min="60"
                       max="3600"
                       value={settings.alertCooldown}
-                      onChange={(e) => setSettings({ ...settings, alertCooldown: parseInt(e.target.value) })}
+                      onChange={(e) =>
+                        setSettings({ ...settings, alertCooldown: parseInt(e.target.value) })
+                      }
                     />
                     <p className="text-xs text-gray-500">
                       Minimum time between similar alerts (60-3600 seconds)
@@ -400,34 +404,46 @@ export default function SettingsPage() {
                   <div className="flex items-center justify-between">
                     <div>
                       <Label htmlFor="auto-acknowledge">Auto-acknowledge Low Alerts</Label>
-                      <p className="text-sm text-gray-500">Automatically acknowledge low-priority alerts</p>
+                      <p className="text-sm text-gray-500">
+                        Automatically acknowledge low-priority alerts
+                      </p>
                     </div>
-                    <div 
-                      className={`w-12 h-6 rounded-full ${settings.autoAcknowledge ? 'bg-green-500' : 'bg-gray-300'} relative cursor-pointer`}
-                      onClick={() => setSettings({ ...settings, autoAcknowledge: !settings.autoAcknowledge })}
+                    <div
+                      className={`h-6 w-12 rounded-full ${settings.autoAcknowledge ? 'bg-green-500' : 'bg-gray-300'} relative cursor-pointer`}
+                      onClick={() =>
+                        setSettings({ ...settings, autoAcknowledge: !settings.autoAcknowledge })
+                      }
                     >
-                      <div className={`w-5 h-5 rounded-full bg-white absolute top-0.5 transition-all ${settings.autoAcknowledge ? 'left-6' : 'left-0.5'}`} />
+                      <div
+                        className={`absolute top-0.5 h-5 w-5 rounded-full bg-white transition-all ${settings.autoAcknowledge ? 'left-6' : 'left-0.5'}`}
+                      />
                     </div>
                   </div>
 
-                  <div className="pt-4 border-t">
-                    <h4 className="text-sm font-medium mb-3">Current Thresholds</h4>
+                  <div className="border-t pt-4">
+                    <h4 className="mb-3 text-sm font-medium">Current Thresholds</h4>
                     <div className="space-y-2">
-                      <div className="flex justify-between items-center p-2 bg-green-50 rounded">
+                      <div className="flex items-center justify-between rounded bg-green-50 p-2">
                         <span className="text-sm text-green-700">Low Alert</span>
                         <span className="text-sm font-medium">{settings.alertThresholds.low}%</span>
                       </div>
-                      <div className="flex justify-between items-center p-2 bg-yellow-50 rounded">
+                      <div className="flex items-center justify-between rounded bg-yellow-50 p-2">
                         <span className="text-sm text-yellow-700">Medium Alert</span>
-                        <span className="text-sm font-medium">{settings.alertThresholds.medium}%</span>
+                        <span className="text-sm font-medium">
+                          {settings.alertThresholds.medium}%
+                        </span>
                       </div>
-                      <div className="flex justify-between items-center p-2 bg-orange-50 rounded">
+                      <div className="flex items-center justify-between rounded bg-orange-50 p-2">
                         <span className="text-sm text-orange-700">High Alert</span>
-                        <span className="text-sm font-medium">{settings.alertThresholds.high}%</span>
+                        <span className="text-sm font-medium">
+                          {settings.alertThresholds.high}%
+                        </span>
                       </div>
-                      <div className="flex justify-between items-center p-2 bg-red-50 rounded">
+                      <div className="flex items-center justify-between rounded bg-red-50 p-2">
                         <span className="text-sm text-red-700">Critical Alert</span>
-                        <span className="text-sm font-medium">{settings.alertThresholds.critical}%</span>
+                        <span className="text-sm font-medium">
+                          {settings.alertThresholds.critical}%
+                        </span>
                       </div>
                     </div>
                   </div>
@@ -437,7 +453,7 @@ export default function SettingsPage() {
           </TabsContent>
 
           <TabsContent value="notifications" className="space-y-6">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
               <Card>
                 <CardHeader>
                   <CardTitle className="flex items-center space-x-2">
@@ -457,11 +473,15 @@ export default function SettingsPage() {
                         <p className="text-sm text-gray-500">Send alerts via email</p>
                       </div>
                     </div>
-                    <div 
-                      className={`w-12 h-6 rounded-full ${settings.emailEnabled ? 'bg-green-500' : 'bg-gray-300'} relative cursor-pointer`}
-                      onClick={() => setSettings({ ...settings, emailEnabled: !settings.emailEnabled })}
+                    <div
+                      className={`h-6 w-12 rounded-full ${settings.emailEnabled ? 'bg-green-500' : 'bg-gray-300'} relative cursor-pointer`}
+                      onClick={() =>
+                        setSettings({ ...settings, emailEnabled: !settings.emailEnabled })
+                      }
                     >
-                      <div className={`w-5 h-5 rounded-full bg-white absolute top-0.5 transition-all ${settings.emailEnabled ? 'left-6' : 'left-0.5'}`} />
+                      <div
+                        className={`absolute top-0.5 h-5 w-5 rounded-full bg-white transition-all ${settings.emailEnabled ? 'left-6' : 'left-0.5'}`}
+                      />
                     </div>
                   </div>
 
@@ -473,11 +493,13 @@ export default function SettingsPage() {
                         <p className="text-sm text-gray-500">Send alerts via text message</p>
                       </div>
                     </div>
-                    <div 
-                      className={`w-12 h-6 rounded-full ${settings.smsEnabled ? 'bg-green-500' : 'bg-gray-300'} relative cursor-pointer`}
+                    <div
+                      className={`h-6 w-12 rounded-full ${settings.smsEnabled ? 'bg-green-500' : 'bg-gray-300'} relative cursor-pointer`}
                       onClick={() => setSettings({ ...settings, smsEnabled: !settings.smsEnabled })}
                     >
-                      <div className={`w-5 h-5 rounded-full bg-white absolute top-0.5 transition-all ${settings.smsEnabled ? 'left-6' : 'left-0.5'}`} />
+                      <div
+                        className={`absolute top-0.5 h-5 w-5 rounded-full bg-white transition-all ${settings.smsEnabled ? 'left-6' : 'left-0.5'}`}
+                      />
                     </div>
                   </div>
 
@@ -489,11 +511,15 @@ export default function SettingsPage() {
                         <p className="text-sm text-gray-500">Browser and mobile push alerts</p>
                       </div>
                     </div>
-                    <div 
-                      className={`w-12 h-6 rounded-full ${settings.pushEnabled ? 'bg-green-500' : 'bg-gray-300'} relative cursor-pointer`}
-                      onClick={() => setSettings({ ...settings, pushEnabled: !settings.pushEnabled })}
+                    <div
+                      className={`h-6 w-12 rounded-full ${settings.pushEnabled ? 'bg-green-500' : 'bg-gray-300'} relative cursor-pointer`}
+                      onClick={() =>
+                        setSettings({ ...settings, pushEnabled: !settings.pushEnabled })
+                      }
                     >
-                      <div className={`w-5 h-5 rounded-full bg-white absolute top-0.5 transition-all ${settings.pushEnabled ? 'left-6' : 'left-0.5'}`} />
+                      <div
+                        className={`absolute top-0.5 h-5 w-5 rounded-full bg-white transition-all ${settings.pushEnabled ? 'left-6' : 'left-0.5'}`}
+                      />
                     </div>
                   </div>
 
@@ -505,11 +531,15 @@ export default function SettingsPage() {
                         <p className="text-sm text-gray-500">Send to external systems</p>
                       </div>
                     </div>
-                    <div 
-                      className={`w-12 h-6 rounded-full ${settings.webhookEnabled ? 'bg-green-500' : 'bg-gray-300'} relative cursor-pointer`}
-                      onClick={() => setSettings({ ...settings, webhookEnabled: !settings.webhookEnabled })}
+                    <div
+                      className={`h-6 w-12 rounded-full ${settings.webhookEnabled ? 'bg-green-500' : 'bg-gray-300'} relative cursor-pointer`}
+                      onClick={() =>
+                        setSettings({ ...settings, webhookEnabled: !settings.webhookEnabled })
+                      }
                     >
-                      <div className={`w-5 h-5 rounded-full bg-white absolute top-0.5 transition-all ${settings.webhookEnabled ? 'left-6' : 'left-0.5'}`} />
+                      <div
+                        className={`absolute top-0.5 h-5 w-5 rounded-full bg-white transition-all ${settings.webhookEnabled ? 'left-6' : 'left-0.5'}`}
+                      />
                     </div>
                   </div>
                 </CardContent>
@@ -518,13 +548,11 @@ export default function SettingsPage() {
               <Card>
                 <CardHeader>
                   <CardTitle>Notification Status</CardTitle>
-                  <CardDescription>
-                    Current status of notification services
-                  </CardDescription>
+                  <CardDescription>Current status of notification services</CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div className="space-y-3">
-                    <div className="flex items-center justify-between p-3 border rounded-lg">
+                    <div className="flex items-center justify-between rounded-lg border p-3">
                       <div className="flex items-center space-x-2">
                         <CheckCircle className="h-4 w-4 text-green-500" />
                         <span className="text-sm font-medium">Email Service</span>
@@ -532,7 +560,7 @@ export default function SettingsPage() {
                       <span className="text-sm text-green-600">Operational</span>
                     </div>
 
-                    <div className="flex items-center justify-between p-3 border rounded-lg">
+                    <div className="flex items-center justify-between rounded-lg border p-3">
                       <div className="flex items-center space-x-2">
                         <CheckCircle className="h-4 w-4 text-green-500" />
                         <span className="text-sm font-medium">SMS Service</span>
@@ -540,7 +568,7 @@ export default function SettingsPage() {
                       <span className="text-sm text-green-600">Operational</span>
                     </div>
 
-                    <div className="flex items-center justify-between p-3 border rounded-lg">
+                    <div className="flex items-center justify-between rounded-lg border p-3">
                       <div className="flex items-center space-x-2">
                         <CheckCircle className="h-4 w-4 text-green-500" />
                         <span className="text-sm font-medium">Push Service</span>
@@ -548,7 +576,7 @@ export default function SettingsPage() {
                       <span className="text-sm text-green-600">Operational</span>
                     </div>
 
-                    <div className="flex items-center justify-between p-3 border rounded-lg">
+                    <div className="flex items-center justify-between rounded-lg border p-3">
                       <div className="flex items-center space-x-2">
                         <AlertTriangle className="h-4 w-4 text-yellow-500" />
                         <span className="text-sm font-medium">Webhook Service</span>
@@ -562,16 +590,14 @@ export default function SettingsPage() {
           </TabsContent>
 
           <TabsContent value="api" className="space-y-6">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
               <Card>
                 <CardHeader>
                   <CardTitle className="flex items-center space-x-2">
                     <Wifi className="h-5 w-5" />
                     <span>API Configuration</span>
                   </CardTitle>
-                  <CardDescription>
-                    Configure API behavior and limits
-                  </CardDescription>
+                  <CardDescription>Configure API behavior and limits</CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div className="space-y-2">
@@ -582,7 +608,9 @@ export default function SettingsPage() {
                       min="5"
                       max="120"
                       value={settings.apiTimeout}
-                      onChange={(e) => setSettings({ ...settings, apiTimeout: parseInt(e.target.value) })}
+                      onChange={(e) =>
+                        setSettings({ ...settings, apiTimeout: parseInt(e.target.value) })
+                      }
                     />
                   </div>
 
@@ -594,7 +622,9 @@ export default function SettingsPage() {
                       min="1"
                       max="10"
                       value={settings.maxRetries}
-                      onChange={(e) => setSettings({ ...settings, maxRetries: parseInt(e.target.value) })}
+                      onChange={(e) =>
+                        setSettings({ ...settings, maxRetries: parseInt(e.target.value) })
+                      }
                     />
                   </div>
 
@@ -606,7 +636,9 @@ export default function SettingsPage() {
                       min="10"
                       max="1000"
                       value={settings.rateLimitPerMinute}
-                      onChange={(e) => setSettings({ ...settings, rateLimitPerMinute: parseInt(e.target.value) })}
+                      onChange={(e) =>
+                        setSettings({ ...settings, rateLimitPerMinute: parseInt(e.target.value) })
+                      }
                     />
                   </div>
                 </CardContent>
@@ -615,9 +647,7 @@ export default function SettingsPage() {
               <Card>
                 <CardHeader>
                   <CardTitle>API Status</CardTitle>
-                  <CardDescription>
-                    Current API performance and statistics
-                  </CardDescription>
+                  <CardDescription>Current API performance and statistics</CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div className="grid grid-cols-2 gap-4">
@@ -655,7 +685,7 @@ export default function SettingsPage() {
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
                   <div className="space-y-4">
                     <div className="space-y-2">
                       <Label htmlFor="theme">Theme</Label>
@@ -676,11 +706,15 @@ export default function SettingsPage() {
                         <Label htmlFor="compact-mode">Compact Mode</Label>
                         <p className="text-sm text-gray-500">Use smaller spacing and elements</p>
                       </div>
-                      <div 
-                        className={`w-12 h-6 rounded-full ${settings.compactMode ? 'bg-green-500' : 'bg-gray-300'} relative cursor-pointer`}
-                        onClick={() => setSettings({ ...settings, compactMode: !settings.compactMode })}
+                      <div
+                        className={`h-6 w-12 rounded-full ${settings.compactMode ? 'bg-green-500' : 'bg-gray-300'} relative cursor-pointer`}
+                        onClick={() =>
+                          setSettings({ ...settings, compactMode: !settings.compactMode })
+                        }
                       >
-                        <div className={`w-5 h-5 rounded-full bg-white absolute top-0.5 transition-all ${settings.compactMode ? 'left-6' : 'left-0.5'}`} />
+                        <div
+                          className={`absolute top-0.5 h-5 w-5 rounded-full bg-white transition-all ${settings.compactMode ? 'left-6' : 'left-0.5'}`}
+                        />
                       </div>
                     </div>
                   </div>
@@ -689,26 +723,38 @@ export default function SettingsPage() {
                     <div className="flex items-center justify-between">
                       <div>
                         <Label htmlFor="animations">Show Animations</Label>
-                        <p className="text-sm text-gray-500">Enable smooth transitions and effects</p>
+                        <p className="text-sm text-gray-500">
+                          Enable smooth transitions and effects
+                        </p>
                       </div>
-                      <div 
-                        className={`w-12 h-6 rounded-full ${settings.showAnimations ? 'bg-green-500' : 'bg-gray-300'} relative cursor-pointer`}
-                        onClick={() => setSettings({ ...settings, showAnimations: !settings.showAnimations })}
+                      <div
+                        className={`h-6 w-12 rounded-full ${settings.showAnimations ? 'bg-green-500' : 'bg-gray-300'} relative cursor-pointer`}
+                        onClick={() =>
+                          setSettings({ ...settings, showAnimations: !settings.showAnimations })
+                        }
                       >
-                        <div className={`w-5 h-5 rounded-full bg-white absolute top-0.5 transition-all ${settings.showAnimations ? 'left-6' : 'left-0.5'}`} />
+                        <div
+                          className={`absolute top-0.5 h-5 w-5 rounded-full bg-white transition-all ${settings.showAnimations ? 'left-6' : 'left-0.5'}`}
+                        />
                       </div>
                     </div>
 
                     <div className="flex items-center justify-between">
                       <div>
                         <Label htmlFor="high-contrast">High Contrast</Label>
-                        <p className="text-sm text-gray-500">Improve accessibility with higher contrast</p>
+                        <p className="text-sm text-gray-500">
+                          Improve accessibility with higher contrast
+                        </p>
                       </div>
-                      <div 
-                        className={`w-12 h-6 rounded-full ${settings.highContrast ? 'bg-green-500' : 'bg-gray-300'} relative cursor-pointer`}
-                        onClick={() => setSettings({ ...settings, highContrast: !settings.highContrast })}
+                      <div
+                        className={`h-6 w-12 rounded-full ${settings.highContrast ? 'bg-green-500' : 'bg-gray-300'} relative cursor-pointer`}
+                        onClick={() =>
+                          setSettings({ ...settings, highContrast: !settings.highContrast })
+                        }
                       >
-                        <div className={`w-5 h-5 rounded-full bg-white absolute top-0.5 transition-all ${settings.highContrast ? 'left-6' : 'left-0.5'}`} />
+                        <div
+                          className={`absolute top-0.5 h-5 w-5 rounded-full bg-white transition-all ${settings.highContrast ? 'left-6' : 'left-0.5'}`}
+                        />
                       </div>
                     </div>
                   </div>

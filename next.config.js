@@ -4,11 +4,7 @@ const nextConfig = {
     typedRoutes: true,
   },
   images: {
-    domains: [
-      'res.cloudinary.com',
-      'images.unsplash.com',
-      'lh3.googleusercontent.com',
-    ],
+    domains: ['res.cloudinary.com', 'images.unsplash.com', 'lh3.googleusercontent.com'],
     formats: ['image/webp', 'image/avif'],
   },
   env: {

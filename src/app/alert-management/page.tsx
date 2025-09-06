@@ -9,8 +9,8 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '../../components/ui/textarea';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { 
-  AlertTriangle, 
+import {
+  AlertTriangle,
   Bell,
   Send,
   Clock,
@@ -27,7 +27,7 @@ import {
   Settings,
   Plus,
   Filter,
-  Search
+  Search,
 } from 'lucide-react';
 
 // Mock alert data
@@ -44,7 +44,7 @@ const mockAlerts = [
     duration: null,
     resolved: true,
     resolvedAt: new Date().toISOString(),
-    isActive: false
+    isActive: false,
   },
   {
     id: '2',
@@ -58,7 +58,7 @@ const mockAlerts = [
     duration: 120,
     resolved: true,
     resolvedAt: new Date(Date.now() - 30 * 60 * 1000).toISOString(),
-    isActive: false
+    isActive: false,
   },
   {
     id: '3',
@@ -72,8 +72,8 @@ const mockAlerts = [
     duration: 45,
     resolved: true,
     resolvedAt: new Date(Date.now() - 23 * 60 * 60 * 1000).toISOString(),
-    isActive: false
-  }
+    isActive: false,
+  },
 ];
 
 const mockNotifications = [
@@ -84,7 +84,7 @@ const mockNotifications = [
     message: 'Tsunami Alert: Normal conditions in Pacific Northwest',
     status: 'DELIVERED',
     sentAt: new Date(Date.now() - 5 * 60 * 1000).toISOString(),
-    deliveredAt: new Date(Date.now() - 4 * 60 * 1000).toISOString()
+    deliveredAt: new Date(Date.now() - 4 * 60 * 1000).toISOString(),
   },
   {
     id: '2',
@@ -93,7 +93,7 @@ const mockNotifications = [
     message: 'Weekly Tsunami System Status Report',
     status: 'SENT',
     sentAt: new Date(Date.now() - 15 * 60 * 1000).toISOString(),
-    deliveredAt: null
+    deliveredAt: null,
   },
   {
     id: '3',
@@ -102,8 +102,8 @@ const mockNotifications = [
     message: 'System maintenance scheduled for tonight',
     status: 'DELIVERED',
     sentAt: new Date(Date.now() - 60 * 60 * 1000).toISOString(),
-    deliveredAt: new Date(Date.now() - 59 * 60 * 1000).toISOString()
-  }
+    deliveredAt: new Date(Date.now() - 59 * 60 * 1000).toISOString(),
+  },
 ];
 
 export default function AlertManagementPage() {
@@ -178,11 +178,11 @@ export default function AlertManagementPage() {
 
   const handleSendTestAlert = async () => {
     if (!testMessage.trim() || !testRecipients.trim()) return;
-    
+
     setIsSending(true);
     // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 2000));
-    
+    await new Promise((resolve) => setTimeout(resolve, 2000));
+
     // Add to notifications list
     const newNotification = {
       id: Date.now().toString(),
@@ -191,21 +191,22 @@ export default function AlertManagementPage() {
       message: testMessage,
       status: 'SENT',
       sentAt: new Date().toISOString(),
-      deliveredAt: null
+      deliveredAt: null,
     };
-    
+
     setNotifications([newNotification, ...notifications]);
     setTestMessage('');
     setTestRecipients('');
     setIsSending(false);
   };
 
-  const filteredAlerts = alerts.filter(alert => {
-    const matchesSearch = alert.message.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         alert.region.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         alert.alertId.toLowerCase().includes(searchTerm.toLowerCase());
+  const filteredAlerts = alerts.filter((alert) => {
+    const matchesSearch =
+      alert.message.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      alert.region.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      alert.alertId.toLowerCase().includes(searchTerm.toLowerCase());
     const matchesStatus = statusFilter === 'ALL' || alert.status === statusFilter;
-    
+
     return matchesSearch && matchesStatus;
   });
 
@@ -227,22 +228,23 @@ export default function AlertManagementPage() {
       <div className="p-4 lg:p-8">
         {/* Header */}
         <div className="mb-8">
-          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+          <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
             <div>
-              <h1 className="text-2xl lg:text-3xl font-bold text-gray-900">
-                Alert Management
-              </h1>
-              <p className="text-gray-600 mt-1">
+              <h1 className="text-2xl font-bold text-gray-900 lg:text-3xl">Alert Management</h1>
+              <p className="mt-1 text-gray-600">
                 Monitor and manage tsunami alerts and notifications
               </p>
             </div>
             <div className="flex items-center space-x-2">
               <Button variant="outline" size="sm">
-                <Settings className="h-4 w-4 mr-2" />
+                <Settings className="mr-2 h-4 w-4" />
                 Settings
               </Button>
-              <Button size="sm" className="bg-gradient-to-r from-tsunami-blue-600 to-tsunami-green-600">
-                <Plus className="h-4 w-4 mr-2" />
+              <Button
+                size="sm"
+                className="bg-gradient-to-r from-tsunami-blue-600 to-tsunami-green-600"
+              >
+                <Plus className="mr-2 h-4 w-4" />
                 Create Alert
               </Button>
             </div>
@@ -250,7 +252,7 @@ export default function AlertManagementPage() {
         </div>
 
         {/* Status Overview */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+        <div className="mb-8 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
           <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium">Current Status</CardTitle>
@@ -258,9 +260,7 @@ export default function AlertManagementPage() {
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold text-green-600">SAFE</div>
-              <p className="text-xs text-muted-foreground">
-                All systems normal
-              </p>
+              <p className="text-xs text-muted-foreground">All systems normal</p>
             </CardContent>
           </Card>
 
@@ -271,9 +271,7 @@ export default function AlertManagementPage() {
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold">0</div>
-              <p className="text-xs text-muted-foreground">
-                No active alerts
-              </p>
+              <p className="text-xs text-muted-foreground">No active alerts</p>
             </CardContent>
           </Card>
 
@@ -284,9 +282,7 @@ export default function AlertManagementPage() {
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold">{notifications.length}</div>
-              <p className="text-xs text-muted-foreground">
-                Last 24 hours
-              </p>
+              <p className="text-xs text-muted-foreground">Last 24 hours</p>
             </CardContent>
           </Card>
 
@@ -297,9 +293,7 @@ export default function AlertManagementPage() {
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold">&lt;30s</div>
-              <p className="text-xs text-muted-foreground">
-                Average alert time
-              </p>
+              <p className="text-xs text-muted-foreground">Average alert time</p>
             </CardContent>
           </Card>
         </div>
@@ -316,13 +310,13 @@ export default function AlertManagementPage() {
             {/* Filters */}
             <Card>
               <CardHeader>
-                <CardTitle className="text-lg flex items-center">
-                  <Filter className="h-5 w-5 mr-2" />
+                <CardTitle className="flex items-center text-lg">
+                  <Filter className="mr-2 h-5 w-5" />
                   Filters & Search
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
                   <div className="space-y-2">
                     <Label htmlFor="search-alerts">Search Alerts</Label>
                     <div className="relative">
@@ -336,7 +330,7 @@ export default function AlertManagementPage() {
                       />
                     </div>
                   </div>
-                  
+
                   <div className="space-y-2">
                     <Label htmlFor="status-filter">Alert Status</Label>
                     <select
@@ -352,10 +346,10 @@ export default function AlertManagementPage() {
                       <option value="ALERT">Alert</option>
                     </select>
                   </div>
-                  
+
                   <div className="flex items-end">
-                    <Button 
-                      variant="outline" 
+                    <Button
+                      variant="outline"
                       onClick={() => {
                         setSearchTerm('');
                         setStatusFilter('ALL');
@@ -372,9 +366,9 @@ export default function AlertManagementPage() {
             {/* Alerts List */}
             <div className="space-y-4">
               {filteredAlerts.map((alert) => (
-                <Card key={alert.id} className="hover:shadow-md transition-shadow">
+                <Card key={alert.id} className="transition-shadow hover:shadow-md">
                   <CardContent className="p-6">
-                    <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
+                    <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
                       <div className="flex-1 space-y-3">
                         <div className="flex flex-wrap items-center gap-3">
                           <Badge className={`${getStatusColor(alert.status)}`}>
@@ -390,31 +384,31 @@ export default function AlertManagementPage() {
                             <XCircle className="h-4 w-4 text-red-500" />
                           )}
                         </div>
-                        
-                        <p className="text-gray-900 font-medium">{alert.message}</p>
-                        
+
+                        <p className="font-medium text-gray-900">{alert.message}</p>
+
                         <div className="flex flex-wrap items-center gap-4 text-sm text-gray-500">
                           <div className="flex items-center">
-                            <Clock className="h-4 w-4 mr-1" />
+                            <Clock className="mr-1 h-4 w-4" />
                             {formatTimeAgo(alert.timestamp)}
                           </div>
                           <div className="flex items-center">
-                            <Users className="h-4 w-4 mr-1" />
+                            <Users className="mr-1 h-4 w-4" />
                             {alert.region}
                           </div>
                           <div className="flex items-center">
-                            <Activity className="h-4 w-4 mr-1" />
+                            <Activity className="mr-1 h-4 w-4" />
                             Confidence: {alert.confidence}%
                           </div>
                           {alert.duration && (
                             <div className="flex items-center">
-                              <Clock className="h-4 w-4 mr-1" />
+                              <Clock className="mr-1 h-4 w-4" />
                               Duration: {alert.duration}min
                             </div>
                           )}
                         </div>
                       </div>
-                      
+
                       <div className="flex items-center space-x-2">
                         <Button variant="outline" size="sm">
                           View Details
@@ -434,9 +428,9 @@ export default function AlertManagementPage() {
             {filteredAlerts.length === 0 && (
               <Card>
                 <CardContent className="flex flex-col items-center justify-center py-12">
-                  <AlertTriangle className="h-12 w-12 text-gray-400 mb-4" />
-                  <h3 className="text-lg font-medium text-gray-900 mb-2">No alerts found</h3>
-                  <p className="text-gray-500 text-center">
+                  <AlertTriangle className="mb-4 h-12 w-12 text-gray-400" />
+                  <h3 className="mb-2 text-lg font-medium text-gray-900">No alerts found</h3>
+                  <p className="text-center text-gray-500">
                     Try adjusting your search criteria or filters to find alerts.
                   </p>
                 </CardContent>
@@ -455,19 +449,24 @@ export default function AlertManagementPage() {
               <CardContent>
                 <div className="space-y-4">
                   {notifications.map((notification) => (
-                    <div key={notification.id} className="flex items-center justify-between p-4 border rounded-lg">
+                    <div
+                      key={notification.id}
+                      className="flex items-center justify-between rounded-lg border p-4"
+                    >
                       <div className="flex items-start space-x-4">
-                        <div className="p-2 bg-gray-100 rounded-lg">
+                        <div className="rounded-lg bg-gray-100 p-2">
                           {getNotificationTypeIcon(notification.type)}
                         </div>
                         <div className="flex-1">
-                          <div className="flex items-center space-x-2 mb-1">
+                          <div className="mb-1 flex items-center space-x-2">
                             <span className="font-medium">{notification.type}</span>
-                            <span className={`text-sm ${getNotificationStatusColor(notification.status)}`}>
+                            <span
+                              className={`text-sm ${getNotificationStatusColor(notification.status)}`}
+                            >
                               {notification.status}
                             </span>
                           </div>
-                          <p className="text-sm text-gray-600 mb-1">{notification.message}</p>
+                          <p className="mb-1 text-sm text-gray-600">{notification.message}</p>
                           <p className="text-xs text-gray-500">To: {notification.recipient}</p>
                         </div>
                       </div>
@@ -502,11 +501,13 @@ export default function AlertManagementPage() {
                     id="test-message"
                     placeholder="Enter your test alert message..."
                     value={testMessage}
-                    onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setTestMessage(e.target.value)}
+                    onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
+                      setTestMessage(e.target.value)
+                    }
                     rows={3}
                   />
                 </div>
-                
+
                 <div className="space-y-2">
                   <Label htmlFor="test-recipients">Recipients</Label>
                   <Input
@@ -516,7 +517,7 @@ export default function AlertManagementPage() {
                     onChange={(e) => setTestRecipients(e.target.value)}
                   />
                 </div>
-                
+
                 <div className="flex items-center space-x-4">
                   <Button
                     onClick={handleSendTestAlert}
@@ -525,21 +526,23 @@ export default function AlertManagementPage() {
                   >
                     {isSending ? (
                       <>
-                        <Volume2 className="h-4 w-4 mr-2 animate-pulse" />
+                        <Volume2 className="mr-2 h-4 w-4 animate-pulse" />
                         Sending...
                       </>
                     ) : (
                       <>
-                        <Send className="h-4 w-4 mr-2" />
+                        <Send className="mr-2 h-4 w-4" />
                         Send Test Alert
                       </>
                     )}
                   </Button>
-                  
+
                   <Button
                     variant="outline"
                     onClick={() => {
-                      setTestMessage('🧪 This is a test alert from the Tsunami Early Warning System. Please ignore this message.');
+                      setTestMessage(
+                        '🧪 This is a test alert from the Tsunami Early Warning System. Please ignore this message.'
+                      );
                       setTestRecipients('+1-555-TEST');
                     }}
                   >
@@ -551,13 +554,11 @@ export default function AlertManagementPage() {
           </TabsContent>
 
           <TabsContent value="settings" className="space-y-6">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
               <Card>
                 <CardHeader>
                   <CardTitle>Notification Channels</CardTitle>
-                  <CardDescription>
-                    Configure notification delivery methods
-                  </CardDescription>
+                  <CardDescription>Configure notification delivery methods</CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div className="flex items-center justify-between">
@@ -568,9 +569,9 @@ export default function AlertManagementPage() {
                         <p className="text-sm text-gray-500">Send alerts via text message</p>
                       </div>
                     </div>
-                    <div className="w-2 h-2 bg-green-500 rounded-full" />
+                    <div className="h-2 w-2 rounded-full bg-green-500" />
                   </div>
-                  
+
                   <div className="flex items-center justify-between">
                     <div className="flex items-center space-x-3">
                       <Mail className="h-5 w-5 text-green-500" />
@@ -579,9 +580,9 @@ export default function AlertManagementPage() {
                         <p className="text-sm text-gray-500">Send alerts via email</p>
                       </div>
                     </div>
-                    <div className="w-2 h-2 bg-green-500 rounded-full" />
+                    <div className="h-2 w-2 rounded-full bg-green-500" />
                   </div>
-                  
+
                   <div className="flex items-center justify-between">
                     <div className="flex items-center space-x-3">
                       <Bell className="h-5 w-5 text-purple-500" />
@@ -590,9 +591,9 @@ export default function AlertManagementPage() {
                         <p className="text-sm text-gray-500">Send alerts to mobile apps</p>
                       </div>
                     </div>
-                    <div className="w-2 h-2 bg-green-500 rounded-full" />
+                    <div className="h-2 w-2 rounded-full bg-green-500" />
                   </div>
-                  
+
                   <div className="flex items-center justify-between">
                     <div className="flex items-center space-x-3">
                       <Globe className="h-5 w-5 text-orange-500" />
@@ -601,7 +602,7 @@ export default function AlertManagementPage() {
                         <p className="text-sm text-gray-500">Send to external systems</p>
                       </div>
                     </div>
-                    <div className="w-2 h-2 bg-yellow-500 rounded-full" />
+                    <div className="h-2 w-2 rounded-full bg-yellow-500" />
                   </div>
                 </CardContent>
               </Card>
@@ -609,9 +610,7 @@ export default function AlertManagementPage() {
               <Card>
                 <CardHeader>
                   <CardTitle>Alert Thresholds</CardTitle>
-                  <CardDescription>
-                    Configure when alerts should be triggered
-                  </CardDescription>
+                  <CardDescription>Configure when alerts should be triggered</CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div className="space-y-2">
@@ -621,7 +620,7 @@ export default function AlertManagementPage() {
                       <span className="text-sm text-gray-500">% confidence</span>
                     </div>
                   </div>
-                  
+
                   <div className="space-y-2">
                     <Label>Medium Alert Threshold</Label>
                     <div className="flex items-center space-x-2">
@@ -629,7 +628,7 @@ export default function AlertManagementPage() {
                       <span className="text-sm text-gray-500">% confidence</span>
                     </div>
                   </div>
-                  
+
                   <div className="space-y-2">
                     <Label>High Alert Threshold</Label>
                     <div className="flex items-center space-x-2">
@@ -637,7 +636,7 @@ export default function AlertManagementPage() {
                       <span className="text-sm text-gray-500">% confidence</span>
                     </div>
                   </div>
-                  
+
                   <Button variant="outline" className="w-full">
                     Save Thresholds
                   </Button>

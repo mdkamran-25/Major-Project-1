@@ -138,7 +138,7 @@
 }
 
 .status-alert {
-  @apply bg-red-500 text-red-50 animate-pulse;
+  @apply animate-pulse bg-red-500 text-red-50;
 }
 
 /* GPS station markers */
@@ -155,7 +155,7 @@
 }
 
 .gps-marker.anomalous {
-  @apply bg-red-500 animate-pulse;
+  @apply animate-pulse bg-red-500;
 }
 
 /* Chart styles */
@@ -203,11 +203,11 @@
   .no-print {
     display: none !important;
   }
-  
+
   body {
-    @apply text-black bg-white;
+    @apply bg-white text-black;
   }
-  
+
   .mapboxgl-map {
     @apply grayscale;
   }
@@ -218,7 +218,7 @@
   .mapboxgl-popup {
     @apply max-w-xs;
   }
-  
+
   .mapboxgl-popup-content {
     @apply p-3 text-sm;
   }
@@ -229,15 +229,15 @@
   .gps-marker {
     @apply border-4;
   }
-  
+
   .status-safe {
     @apply bg-green-700;
   }
-  
+
   .status-warning {
     @apply bg-yellow-700;
   }
-  
+
   .status-alert {
     @apply bg-red-700;
   }
@@ -250,7 +250,7 @@
   .animate-spin {
     animation: none;
   }
-  
+
   .transition-all,
   .transition-colors,
   .transition-transform {

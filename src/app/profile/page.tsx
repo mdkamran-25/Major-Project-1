@@ -12,8 +12,8 @@ import { Textarea } from '@/components/ui/textarea';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useAuth } from '@/context/AuthContext';
-import { 
-  User, 
+import {
+  User,
   Mail,
   Phone,
   MapPin,
@@ -30,7 +30,7 @@ import {
   Clock,
   Activity,
   CheckCircle,
-  AlertTriangle
+  AlertTriangle,
 } from 'lucide-react';
 
 // Mock user data extensions
@@ -42,7 +42,7 @@ const mockUserExtensions = {
     phone: '+1 (555) 123-4567',
     department: 'Emergency Management',
     joinDate: '2020-03-15',
-    lastLogin: new Date(Date.now() - 2 * 60 * 60 * 1000).toISOString()
+    lastLogin: new Date(Date.now() - 2 * 60 * 60 * 1000).toISOString(),
   },
   preferences: {
     alertTypes: ['HIGH', 'CRITICAL'],
@@ -52,40 +52,40 @@ const mockUserExtensions = {
     pushNotifications: true,
     language: 'English',
     theme: 'system',
-    timezone: 'America/Vancouver'
+    timezone: 'America/Vancouver',
   },
   activity: [
     {
       id: '1',
       action: 'Viewed GPS monitoring dashboard',
       timestamp: new Date(Date.now() - 30 * 60 * 1000).toISOString(),
-      type: 'view'
+      type: 'view',
     },
     {
       id: '2',
       action: 'Updated alert preferences',
       timestamp: new Date(Date.now() - 2 * 60 * 60 * 1000).toISOString(),
-      type: 'update'
+      type: 'update',
     },
     {
       id: '3',
       action: 'Acknowledged system alert',
       timestamp: new Date(Date.now() - 4 * 60 * 60 * 1000).toISOString(),
-      type: 'action'
+      type: 'action',
     },
     {
       id: '4',
       action: 'Generated analytics report',
       timestamp: new Date(Date.now() - 6 * 60 * 60 * 1000).toISOString(),
-      type: 'export'
+      type: 'export',
     },
     {
       id: '5',
       action: 'Logged into system',
       timestamp: new Date(Date.now() - 8 * 60 * 60 * 1000).toISOString(),
-      type: 'login'
-    }
-  ]
+      type: 'login',
+    },
+  ],
 };
 
 export default function ProfilePage() {
@@ -93,14 +93,14 @@ export default function ProfilePage() {
   const [isEditing, setIsEditing] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
   const [showPhone, setShowPhone] = useState(false);
-  
+
   // Form states
   const [formData, setFormData] = useState({
     name: user?.displayName || '',
     bio: mockUserExtensions.profile.bio,
     location: mockUserExtensions.profile.location,
     phone: mockUserExtensions.profile.phone,
-    department: mockUserExtensions.profile.department
+    department: mockUserExtensions.profile.department,
   });
 
   const [preferences, setPreferences] = useState(
@@ -110,9 +110,9 @@ export default function ProfilePage() {
   // Update form data when user profile loads
   useEffect(() => {
     if (user) {
-      setFormData(prev => ({
+      setFormData((prev) => ({
         ...prev,
-        name: user.displayName || ''
+        name: user.displayName || '',
       }));
     }
     if (userProfile?.preferences) {
@@ -122,7 +122,7 @@ export default function ProfilePage() {
 
   const handleSave = async () => {
     if (!user) return;
-    
+
     setIsSaving(true);
     try {
       // Update user profile in Firebase
@@ -130,12 +130,12 @@ export default function ProfilePage() {
         displayName: formData.name,
         preferences: preferences,
         // Add other fields as needed
-        updatedAt: new Date()
+        updatedAt: new Date(),
       });
-      
+
       // Refresh user profile to get latest data
       await refreshUserProfile();
-      
+
       setIsEditing(false);
     } catch (error) {
       console.error('Error saving profile:', error);
@@ -151,7 +151,7 @@ export default function ProfilePage() {
       bio: mockUserExtensions.profile.bio,
       location: mockUserExtensions.profile.location,
       phone: mockUserExtensions.profile.phone,
-      department: mockUserExtensions.profile.department
+      department: mockUserExtensions.profile.department,
     });
     setIsEditing(false);
   };
@@ -204,14 +204,10 @@ export default function ProfilePage() {
       <div className="p-4 lg:p-8">
         {/* Header */}
         <div className="mb-8">
-          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+          <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
             <div>
-              <h1 className="text-2xl lg:text-3xl font-bold text-gray-900">
-                Profile Settings
-              </h1>
-              <p className="text-gray-600 mt-1">
-                Manage your account information and preferences
-              </p>
+              <h1 className="text-2xl font-bold text-gray-900 lg:text-3xl">Profile Settings</h1>
+              <p className="mt-1 text-gray-600">Manage your account information and preferences</p>
             </div>
             <div className="flex items-center space-x-2">
               {isEditing ? (
@@ -219,21 +215,18 @@ export default function ProfilePage() {
                   <Button variant="outline" onClick={handleCancel}>
                     Cancel
                   </Button>
-                  <Button 
+                  <Button
                     onClick={handleSave}
                     disabled={isSaving}
                     className="bg-gradient-to-r from-tsunami-blue-600 to-tsunami-green-600"
                   >
-                    <Save className="h-4 w-4 mr-2" />
+                    <Save className="mr-2 h-4 w-4" />
                     {isSaving ? 'Saving...' : 'Save Changes'}
                   </Button>
                 </>
               ) : (
-                <Button 
-                  onClick={() => setIsEditing(true)}
-                  variant="outline"
-                >
-                  <Settings className="h-4 w-4 mr-2" />
+                <Button onClick={() => setIsEditing(true)} variant="outline">
+                  <Settings className="mr-2 h-4 w-4" />
                   Edit Profile
                 </Button>
               )}
@@ -244,14 +237,11 @@ export default function ProfilePage() {
         {/* Profile Overview */}
         <Card className="mb-8">
           <CardContent className="p-6">
-            <div className="flex flex-col sm:flex-row sm:items-center gap-6">
+            <div className="flex flex-col gap-6 sm:flex-row sm:items-center">
               <div className="relative">
                 <Avatar className="h-24 w-24">
-                  <AvatarImage 
-                    src={user?.photoURL || ''} 
-                    alt={user?.displayName || 'User'} 
-                  />
-                  <AvatarFallback className="bg-gradient-to-br from-tsunami-blue-500 to-tsunami-green-500 text-white text-xl">
+                  <AvatarImage src={user?.photoURL || ''} alt={user?.displayName || 'User'} />
+                  <AvatarFallback className="bg-gradient-to-br from-tsunami-blue-500 to-tsunami-green-500 text-xl text-white">
                     {(user?.displayName || user?.email || 'U').charAt(0).toUpperCase()}
                   </AvatarFallback>
                 </Avatar>
@@ -264,9 +254,9 @@ export default function ProfilePage() {
                   </Button>
                 )}
               </div>
-              
+
               <div className="flex-1 space-y-2">
-                <div className="flex flex-col sm:flex-row sm:items-center gap-3">
+                <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
                   <h2 className="text-2xl font-bold text-gray-900">
                     {user?.displayName || 'User'}
                   </h2>
@@ -275,31 +265,29 @@ export default function ProfilePage() {
                       {userProfile?.role || 'VIEWER'}
                     </Badge>
                     {userProfile?.isActive && (
-                      <Badge variant="outline" className="text-green-600 border-green-200">
+                      <Badge variant="outline" className="border-green-200 text-green-600">
                         Active
                       </Badge>
                     )}
                   </div>
                 </div>
-                
+
                 <div className="flex flex-wrap items-center gap-4 text-sm text-gray-600">
                   <div className="flex items-center">
-                    <Mail className="h-4 w-4 mr-2" />
+                    <Mail className="mr-2 h-4 w-4" />
                     {user?.email}
                   </div>
                   <div className="flex items-center">
-                    <MapPin className="h-4 w-4 mr-2" />
+                    <MapPin className="mr-2 h-4 w-4" />
                     {mockUserExtensions.profile.location}
                   </div>
                   <div className="flex items-center">
-                    <Calendar className="h-4 w-4 mr-2" />
+                    <Calendar className="mr-2 h-4 w-4" />
                     Joined {new Date(mockUserExtensions.profile.joinDate).toLocaleDateString()}
                   </div>
                 </div>
-                
-                <p className="text-gray-700 mt-3">
-                  {mockUserExtensions.profile.bio}
-                </p>
+
+                <p className="mt-3 text-gray-700">{mockUserExtensions.profile.bio}</p>
               </div>
             </div>
           </CardContent>
@@ -314,7 +302,7 @@ export default function ProfilePage() {
           </TabsList>
 
           <TabsContent value="profile" className="space-y-6">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
               <Card>
                 <CardHeader>
                   <CardTitle>Personal Information</CardTitle>
@@ -335,12 +323,7 @@ export default function ProfilePage() {
 
                   <div className="space-y-2">
                     <Label htmlFor="email">Email Address</Label>
-                    <Input
-                      id="email"
-                      value={user?.email || ''}
-                      disabled
-                      className="bg-gray-50"
-                    />
+                    <Input id="email" value={user?.email || ''} disabled className="bg-gray-50" />
                     <p className="text-xs text-gray-500">
                       Email cannot be changed. Contact administrator if needed.
                     </p>
@@ -408,47 +391,45 @@ export default function ProfilePage() {
               <Card>
                 <CardHeader>
                   <CardTitle>Account Information</CardTitle>
-                  <CardDescription>
-                    Your account status and system access details
-                  </CardDescription>
+                  <CardDescription>Your account status and system access details</CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div className="space-y-3">
-                    <div className="flex justify-between items-center">
+                    <div className="flex items-center justify-between">
                       <span className="text-sm font-medium">User ID</span>
                       <span className="text-sm text-gray-600">{user?.uid || 'N/A'}</span>
                     </div>
-                    
-                    <div className="flex justify-between items-center">
+
+                    <div className="flex items-center justify-between">
                       <span className="text-sm font-medium">Role</span>
                       <Badge className={`${getRoleBadgeColor(userProfile?.role || 'VIEWER')}`}>
                         {userProfile?.role || 'VIEWER'}
                       </Badge>
                     </div>
-                    
-                    <div className="flex justify-between items-center">
+
+                    <div className="flex items-center justify-between">
                       <span className="text-sm font-medium">Account Status</span>
                       <div className="flex items-center space-x-2">
                         <CheckCircle className="h-4 w-4 text-green-500" />
                         <span className="text-sm text-green-600">Active</span>
                       </div>
                     </div>
-                    
-                    <div className="flex justify-between items-center">
+
+                    <div className="flex items-center justify-between">
                       <span className="text-sm font-medium">Join Date</span>
                       <span className="text-sm text-gray-600">
                         {new Date(mockUserExtensions.profile.joinDate).toLocaleDateString()}
                       </span>
                     </div>
-                    
-                    <div className="flex justify-between items-center">
+
+                    <div className="flex items-center justify-between">
                       <span className="text-sm font-medium">Last Login</span>
                       <span className="text-sm text-gray-600">
                         {formatTimeAgo(mockUserExtensions.profile.lastLogin)}
                       </span>
                     </div>
-                    
-                    <div className="flex justify-between items-center">
+
+                    <div className="flex items-center justify-between">
                       <span className="text-sm font-medium">Timezone</span>
                       <span className="text-sm text-gray-600">
                         {mockUserExtensions.profile.timezone}
@@ -456,17 +437,20 @@ export default function ProfilePage() {
                     </div>
                   </div>
 
-                  <div className="pt-4 border-t">
-                    <h4 className="text-sm font-medium mb-3">Permissions</h4>
+                  <div className="border-t pt-4">
+                    <h4 className="mb-3 text-sm font-medium">Permissions</h4>
                     <div className="space-y-2">
                       {[
                         { name: 'View GPS Data', granted: true },
                         { name: 'View Satellite Imagery', granted: true },
                         { name: 'Manage Alerts', granted: userProfile?.role !== 'VIEWER' },
                         { name: 'System Administration', granted: userProfile?.role === 'ADMIN' },
-                        { name: 'User Management', granted: userProfile?.role === 'ADMIN' }
+                        { name: 'User Management', granted: userProfile?.role === 'ADMIN' },
                       ].map((permission) => (
-                        <div key={permission.name} className="flex items-center justify-between text-sm">
+                        <div
+                          key={permission.name}
+                          className="flex items-center justify-between text-sm"
+                        >
                           <span className="text-gray-600">{permission.name}</span>
                           {permission.granted ? (
                             <CheckCircle className="h-4 w-4 text-green-500" />
@@ -483,7 +467,7 @@ export default function ProfilePage() {
           </TabsContent>
 
           <TabsContent value="preferences" className="space-y-6">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
               <Card>
                 <CardHeader>
                   <CardTitle>Notification Preferences</CardTitle>
@@ -501,11 +485,15 @@ export default function ProfilePage() {
                           <p className="text-sm text-gray-500">Receive alerts via email</p>
                         </div>
                       </div>
-                      <div className={`w-12 h-6 rounded-full ${preferences.emailNotifications ? 'bg-green-500' : 'bg-gray-300'} relative cursor-pointer`}>
-                        <div className={`w-5 h-5 rounded-full bg-white absolute top-0.5 transition-all ${preferences.emailNotifications ? 'left-6' : 'left-0.5'}`} />
+                      <div
+                        className={`h-6 w-12 rounded-full ${preferences.emailNotifications ? 'bg-green-500' : 'bg-gray-300'} relative cursor-pointer`}
+                      >
+                        <div
+                          className={`absolute top-0.5 h-5 w-5 rounded-full bg-white transition-all ${preferences.emailNotifications ? 'left-6' : 'left-0.5'}`}
+                        />
                       </div>
                     </div>
-                    
+
                     <div className="flex items-center justify-between">
                       <div className="flex items-center space-x-3">
                         <Smartphone className="h-5 w-5 text-green-500" />
@@ -514,11 +502,15 @@ export default function ProfilePage() {
                           <p className="text-sm text-gray-500">Receive alerts via text message</p>
                         </div>
                       </div>
-                      <div className={`w-12 h-6 rounded-full ${preferences.smsNotifications ? 'bg-green-500' : 'bg-gray-300'} relative cursor-pointer`}>
-                        <div className={`w-5 h-5 rounded-full bg-white absolute top-0.5 transition-all ${preferences.smsNotifications ? 'left-6' : 'left-0.5'}`} />
+                      <div
+                        className={`h-6 w-12 rounded-full ${preferences.smsNotifications ? 'bg-green-500' : 'bg-gray-300'} relative cursor-pointer`}
+                      >
+                        <div
+                          className={`absolute top-0.5 h-5 w-5 rounded-full bg-white transition-all ${preferences.smsNotifications ? 'left-6' : 'left-0.5'}`}
+                        />
                       </div>
                     </div>
-                    
+
                     <div className="flex items-center justify-between">
                       <div className="flex items-center space-x-3">
                         <Bell className="h-5 w-5 text-purple-500" />
@@ -527,13 +519,17 @@ export default function ProfilePage() {
                           <p className="text-sm text-gray-500">Receive alerts in your browser</p>
                         </div>
                       </div>
-                      <div className={`w-12 h-6 rounded-full ${preferences.pushNotifications ? 'bg-green-500' : 'bg-gray-300'} relative cursor-pointer`}>
-                        <div className={`w-5 h-5 rounded-full bg-white absolute top-0.5 transition-all ${preferences.pushNotifications ? 'left-6' : 'left-0.5'}`} />
+                      <div
+                        className={`h-6 w-12 rounded-full ${preferences.pushNotifications ? 'bg-green-500' : 'bg-gray-300'} relative cursor-pointer`}
+                      >
+                        <div
+                          className={`absolute top-0.5 h-5 w-5 rounded-full bg-white transition-all ${preferences.pushNotifications ? 'left-6' : 'left-0.5'}`}
+                        />
                       </div>
                     </div>
                   </div>
 
-                  <div className="pt-4 border-t">
+                  <div className="border-t pt-4">
                     <Label className="text-sm font-medium">Alert Types to Receive</Label>
                     <div className="mt-2 space-y-2">
                       {['LOW', 'MEDIUM', 'HIGH', 'CRITICAL'].map((level) => (
@@ -546,12 +542,12 @@ export default function ProfilePage() {
                               if (e.target.checked) {
                                 setPreferences({
                                   ...preferences,
-                                  alertTypes: [...preferences.alertTypes, level]
+                                  alertTypes: [...preferences.alertTypes, level],
                                 });
                               } else {
                                 setPreferences({
                                   ...preferences,
-                                  alertTypes: preferences.alertTypes.filter(t => t !== level)
+                                  alertTypes: preferences.alertTypes.filter((t) => t !== level),
                                 });
                               }
                             }}
@@ -570,9 +566,7 @@ export default function ProfilePage() {
               <Card>
                 <CardHeader>
                   <CardTitle>Regional Preferences</CardTitle>
-                  <CardDescription>
-                    Select regions you want to monitor
-                  </CardDescription>
+                  <CardDescription>Select regions you want to monitor</CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div className="space-y-2">
@@ -584,7 +578,7 @@ export default function ProfilePage() {
                         'Coastal Oregon',
                         'Northern California',
                         'Puget Sound',
-                        'Columbia River'
+                        'Columbia River',
                       ].map((region) => (
                         <div key={region} className="flex items-center space-x-2">
                           <input
@@ -595,12 +589,12 @@ export default function ProfilePage() {
                               if (e.target.checked) {
                                 setPreferences({
                                   ...preferences,
-                                  regions: [...preferences.regions, region]
+                                  regions: [...preferences.regions, region],
                                 });
                               } else {
                                 setPreferences({
                                   ...preferences,
-                                  regions: preferences.regions.filter(r => r !== region)
+                                  regions: preferences.regions.filter((r) => r !== region),
                                 });
                               }
                             }}
@@ -614,14 +608,16 @@ export default function ProfilePage() {
                     </div>
                   </div>
 
-                  <div className="pt-4 border-t">
+                  <div className="border-t pt-4">
                     <div className="space-y-4">
                       <div className="space-y-2">
                         <Label htmlFor="language">Language</Label>
                         <select
                           id="language"
                           value={preferences.language}
-                          onChange={(e) => setPreferences({ ...preferences, language: e.target.value })}
+                          onChange={(e) =>
+                            setPreferences({ ...preferences, language: e.target.value })
+                          }
                           className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm"
                         >
                           <option value="English">English</option>
@@ -629,13 +625,15 @@ export default function ProfilePage() {
                           <option value="Spanish">Español</option>
                         </select>
                       </div>
-                      
+
                       <div className="space-y-2">
                         <Label htmlFor="theme">Theme</Label>
                         <select
                           id="theme"
                           value={preferences.theme}
-                          onChange={(e) => setPreferences({ ...preferences, theme: e.target.value })}
+                          onChange={(e) =>
+                            setPreferences({ ...preferences, theme: e.target.value })
+                          }
                           className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm"
                         >
                           <option value="system">System</option>
@@ -651,16 +649,14 @@ export default function ProfilePage() {
           </TabsContent>
 
           <TabsContent value="security" className="space-y-6">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
               <Card>
                 <CardHeader>
                   <CardTitle>Account Security</CardTitle>
-                  <CardDescription>
-                    Manage your account security settings
-                  </CardDescription>
+                  <CardDescription>Manage your account security settings</CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-4">
-                  <div className="flex items-center justify-between p-3 border rounded-lg">
+                  <div className="flex items-center justify-between rounded-lg border p-3">
                     <div className="flex items-center space-x-3">
                       <Shield className="h-5 w-5 text-green-500" />
                       <div>
@@ -673,7 +669,7 @@ export default function ProfilePage() {
                     </Button>
                   </div>
 
-                  <div className="flex items-center justify-between p-3 border rounded-lg">
+                  <div className="flex items-center justify-between rounded-lg border p-3">
                     <div className="flex items-center space-x-3">
                       <Globe className="h-5 w-5 text-blue-500" />
                       <div>
@@ -686,7 +682,7 @@ export default function ProfilePage() {
                     </Button>
                   </div>
 
-                  <div className="flex items-center justify-between p-3 border rounded-lg">
+                  <div className="flex items-center justify-between rounded-lg border p-3">
                     <div className="flex items-center space-x-3">
                       <Activity className="h-5 w-5 text-purple-500" />
                       <div>
@@ -720,11 +716,7 @@ export default function ProfilePage() {
 
                   <div className="space-y-2">
                     <Label htmlFor="new-password">New Password</Label>
-                    <Input
-                      id="new-password"
-                      type="password"
-                      placeholder="Enter new password"
-                    />
+                    <Input id="new-password" type="password" placeholder="Enter new password" />
                   </div>
 
                   <div className="space-y-2">
@@ -736,9 +728,7 @@ export default function ProfilePage() {
                     />
                   </div>
 
-                  <Button className="w-full">
-                    Update Password
-                  </Button>
+                  <Button className="w-full">Update Password</Button>
                 </CardContent>
               </Card>
             </div>
@@ -748,20 +738,19 @@ export default function ProfilePage() {
             <Card>
               <CardHeader>
                 <CardTitle>Recent Activity</CardTitle>
-                <CardDescription>
-                  Your recent actions and system interactions
-                </CardDescription>
+                <CardDescription>Your recent actions and system interactions</CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
                   {mockUserExtensions.activity.map((activity) => (
-                    <div key={activity.id} className="flex items-start space-x-4 p-3 border rounded-lg">
-                      <div className="flex-shrink-0 mt-0.5">
-                        {getActivityIcon(activity.type)}
-                      </div>
+                    <div
+                      key={activity.id}
+                      className="flex items-start space-x-4 rounded-lg border p-3"
+                    >
+                      <div className="mt-0.5 flex-shrink-0">{getActivityIcon(activity.type)}</div>
                       <div className="flex-1">
                         <p className="text-sm font-medium">{activity.action}</p>
-                        <div className="flex items-center space-x-2 mt-1">
+                        <div className="mt-1 flex items-center space-x-2">
                           <Clock className="h-3 w-3 text-gray-400" />
                           <span className="text-xs text-gray-500">
                             {formatTimeAgo(activity.timestamp)}
@@ -772,10 +761,8 @@ export default function ProfilePage() {
                   ))}
                 </div>
 
-                <div className="flex justify-center mt-6">
-                  <Button variant="outline">
-                    Load More Activity
-                  </Button>
+                <div className="mt-6 flex justify-center">
+                  <Button variant="outline">Load More Activity</Button>
                 </div>
               </CardContent>
             </Card>

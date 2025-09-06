@@ -96,7 +96,7 @@ async function callGraphQLAPI(query: string, variables: any) {
   );
 
   const data = await response.json();
-  
+
   if (data.errors) {
     throw new Error(data.errors[0]?.message || 'GraphQL API error');
   }
@@ -151,7 +151,7 @@ export const authOptions: NextAuthOptions = {
       },
     }),
   ],
-  
+
   callbacks: {
     async signIn({ user, account, profile }) {
       try {
@@ -220,7 +220,7 @@ export const authOptions: NextAuthOptions = {
 
       session.accessToken = token.accessToken;
       session.refreshToken = token.refreshToken;
-      
+
       if (token.user) {
         session.user = {
           id: token.user.id,
@@ -254,23 +254,20 @@ export const authOptions: NextAuthOptions = {
       // Optional: Call backend logout endpoint
       try {
         if (message.token?.accessToken) {
-          await fetch(
-            process.env.NEXT_PUBLIC_GRAPHQL_ENDPOINT || 'http://localhost:4000/graphql',
-            {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json',
-                Authorization: `Bearer ${message.token.accessToken}`,
-              },
-              body: JSON.stringify({
-                query: `
+          await fetch(process.env.NEXT_PUBLIC_GRAPHQL_ENDPOINT || 'http://localhost:4000/graphql', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: `Bearer ${message.token.accessToken}`,
+            },
+            body: JSON.stringify({
+              query: `
                   mutation Logout {
                     logout
                   }
                 `,
-              }),
-            }
-          );
+            }),
+          });
         }
       } catch (error) {
         console.error('Logout error:', error);

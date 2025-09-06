@@ -24,7 +24,7 @@ export default function ForgotPasswordPage() {
 
     try {
       // Simulate password reset request
-      await new Promise(resolve => setTimeout(resolve, 2000));
+      await new Promise((resolve) => setTimeout(resolve, 2000));
       setSuccess(true);
     } catch (err: any) {
       setError('Failed to send reset email. Please try again.');
@@ -35,14 +35,14 @@ export default function ForgotPasswordPage() {
 
   if (success) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-tsunami-blue-50 via-white to-tsunami-green-50 p-4">
+      <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-tsunami-blue-50 via-white to-tsunami-green-50 p-4">
         <div className="w-full max-w-md">
-          <Card className="shadow-2xl border-0">
-            <CardHeader className="space-y-4 text-center pb-6">
-              <div className="mx-auto w-20 h-20 bg-gradient-to-br from-tsunami-blue-500 to-tsunami-green-500 rounded-full flex items-center justify-center shadow-lg">
+          <Card className="border-0 shadow-2xl">
+            <CardHeader className="space-y-4 pb-6 text-center">
+              <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-gradient-to-br from-tsunami-blue-500 to-tsunami-green-500 shadow-lg">
                 <span className="text-3xl">📧</span>
               </div>
-              <CardTitle className="text-2xl font-bold bg-gradient-to-r from-tsunami-blue-600 to-tsunami-green-600 bg-clip-text text-transparent">
+              <CardTitle className="bg-gradient-to-r from-tsunami-blue-600 to-tsunami-green-600 bg-clip-text text-2xl font-bold text-transparent">
                 Check Your Email
               </CardTitle>
               <CardDescription className="text-base">
@@ -54,14 +54,15 @@ export default function ForgotPasswordPage() {
               <Alert className="border-green-200 bg-green-50">
                 <AlertCircle className="h-4 w-4 text-green-600" />
                 <AlertDescription className="text-green-800">
-                  If an account with email <strong>{email}</strong> exists, you will receive a password reset link shortly.
+                  If an account with email <strong>{email}</strong> exists, you will receive a
+                  password reset link shortly.
                 </AlertDescription>
               </Alert>
 
               <div className="space-y-4">
                 <Button
                   onClick={() => router.push('/auth/signin')}
-                  className="w-full h-12 text-base bg-gradient-to-r from-tsunami-blue-600 to-tsunami-green-600 hover:from-tsunami-blue-700 hover:to-tsunami-green-700 transition-all duration-200"
+                  className="h-12 w-full bg-gradient-to-r from-tsunami-blue-600 to-tsunami-green-600 text-base transition-all duration-200 hover:from-tsunami-blue-700 hover:to-tsunami-green-700"
                 >
                   Back to Sign In
                 </Button>
@@ -71,7 +72,7 @@ export default function ForgotPasswordPage() {
                     Didn&apos;t receive the email?{' '}
                     <button
                       onClick={() => setSuccess(false)}
-                      className="font-medium text-tsunami-blue-600 hover:text-tsunami-blue-700 transition-colors"
+                      className="font-medium text-tsunami-blue-600 transition-colors hover:text-tsunami-blue-700"
                     >
                       Try again
                     </button>
@@ -86,14 +87,14 @@ export default function ForgotPasswordPage() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-tsunami-blue-50 via-white to-tsunami-green-50 p-4">
+    <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-tsunami-blue-50 via-white to-tsunami-green-50 p-4">
       <div className="w-full max-w-md">
-        <Card className="shadow-2xl border-0">
-          <CardHeader className="space-y-4 text-center pb-6">
-            <div className="mx-auto w-20 h-20 bg-gradient-to-br from-tsunami-blue-500 to-tsunami-green-500 rounded-full flex items-center justify-center shadow-lg">
+        <Card className="border-0 shadow-2xl">
+          <CardHeader className="space-y-4 pb-6 text-center">
+            <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-gradient-to-br from-tsunami-blue-500 to-tsunami-green-500 shadow-lg">
               <span className="text-3xl">🔑</span>
             </div>
-            <CardTitle className="text-2xl font-bold bg-gradient-to-r from-tsunami-blue-600 to-tsunami-green-600 bg-clip-text text-transparent">
+            <CardTitle className="bg-gradient-to-r from-tsunami-blue-600 to-tsunami-green-600 bg-clip-text text-2xl font-bold text-transparent">
               Reset Password
             </CardTitle>
             <CardDescription className="text-base">
@@ -128,7 +129,7 @@ export default function ForgotPasswordPage() {
 
               <Button
                 type="submit"
-                className="w-full h-12 text-base bg-gradient-to-r from-tsunami-blue-600 to-tsunami-green-600 hover:from-tsunami-blue-700 hover:to-tsunami-green-700 transition-all duration-200"
+                className="h-12 w-full bg-gradient-to-r from-tsunami-blue-600 to-tsunami-green-600 text-base transition-all duration-200 hover:from-tsunami-blue-700 hover:to-tsunami-green-700"
                 disabled={loading}
               >
                 {loading ? (
@@ -145,7 +146,7 @@ export default function ForgotPasswordPage() {
             <div className="text-center">
               <Link
                 href="/auth/signin"
-                className="inline-flex items-center text-sm font-medium text-tsunami-blue-600 hover:text-tsunami-blue-700 transition-colors"
+                className="inline-flex items-center text-sm font-medium text-tsunami-blue-600 transition-colors hover:text-tsunami-blue-700"
               >
                 <ArrowLeft className="mr-2 h-4 w-4" />
                 Back to Sign In

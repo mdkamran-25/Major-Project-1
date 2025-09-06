@@ -16,16 +16,14 @@ export default function UnauthorizedPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-red-50 via-white to-orange-50 p-4">
+    <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-red-50 via-white to-orange-50 p-4">
       <div className="w-full max-w-md">
-        <Card className="shadow-2xl border-0">
-          <CardHeader className="text-center space-y-4">
-            <div className="mx-auto w-16 h-16 bg-gradient-to-br from-red-500 to-orange-500 rounded-full flex items-center justify-center">
+        <Card className="border-0 shadow-2xl">
+          <CardHeader className="space-y-4 text-center">
+            <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br from-red-500 to-orange-500">
               <ShieldX className="h-8 w-8 text-white" />
             </div>
-            <CardTitle className="text-2xl font-bold text-red-600">
-              Access Denied
-            </CardTitle>
+            <CardTitle className="text-2xl font-bold text-red-600">Access Denied</CardTitle>
             <CardDescription className="text-base">
               You don&apos;t have permission to access this resource
             </CardDescription>
@@ -39,7 +37,8 @@ export default function UnauthorizedPage() {
                     You are signed in as <strong>{user.displayName || user.email}</strong>
                     {userProfile && (
                       <>
-                        {' '}with <strong>{userProfile.role}</strong> role
+                        {' '}
+                        with <strong>{userProfile.role}</strong> role
                       </>
                     )}
                     , but you don&apos;t have the required permissions to view this page.
@@ -48,7 +47,7 @@ export default function UnauthorizedPage() {
                   'Please sign in to access this resource.'
                 )}
               </p>
-              
+
               {userProfile && (
                 <p className="text-xs text-muted-foreground">
                   Contact your administrator if you believe this is an error.
@@ -59,9 +58,7 @@ export default function UnauthorizedPage() {
             <div className="space-y-3">
               {!user ? (
                 <Link href="/auth/signin">
-                  <Button className="w-full">
-                    Sign In
-                  </Button>
+                  <Button className="w-full">Sign In</Button>
                 </Link>
               ) : (
                 <Link href="/dashboard">
@@ -72,21 +69,15 @@ export default function UnauthorizedPage() {
                 </Link>
               )}
 
-              <Button 
-                variant="outline" 
-                onClick={handleGoBack}
-                className="w-full"
-              >
+              <Button variant="outline" onClick={handleGoBack} className="w-full">
                 <ArrowLeft className="mr-2 h-4 w-4" />
                 Go Back
               </Button>
             </div>
 
             {user && (
-              <div className="pt-4 border-t">
-                <p className="text-xs text-muted-foreground mb-2">
-                  Need different access?
-                </p>
+              <div className="border-t pt-4">
+                <p className="mb-2 text-xs text-muted-foreground">Need different access?</p>
                 <Link href="/contact">
                   <Button variant="ghost" size="sm">
                     Contact Support

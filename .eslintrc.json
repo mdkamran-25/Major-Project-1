@@ -1,19 +1,12 @@
 {
-  "extends": [
-    "next/core-web-vitals",
-    "prettier"
-  ],
+  "extends": ["next/core-web-vitals", "prettier"],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "ecmaVersion": 2022,
     "sourceType": "module",
     "project": "./tsconfig.json"
   },
-  "plugins": [
-    "@typescript-eslint",
-    "react-hooks",
-    "tailwindcss"
-  ],
+  "plugins": ["@typescript-eslint", "react-hooks", "tailwindcss"],
   "rules": {
     "@typescript-eslint/no-unused-vars": ["warn", { "argsIgnorePattern": "^_" }],
     "@typescript-eslint/no-explicit-any": "off",
@@ -43,16 +36,7 @@
       "config": "./tailwind.config.js"
     }
   },
-  "ignorePatterns": [
-    "node_modules/",
-    ".next/",
-    "out/",
-    "dist/",
-    "coverage/",
-    "*.config.js",
-    "*.config.ts",
-    "src/types/generated.ts"
-  ],
+  "ignorePatterns": ["node_modules/", ".next/", "out/", "dist/", "coverage/", "*.config.js", "*.config.ts", "src/types/generated.ts"],
   "overrides": [
     {
       "files": ["**/*.test.{ts,tsx}", "**/*.spec.{ts,tsx}", "jest.setup.js"],

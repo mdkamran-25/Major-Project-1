@@ -79,14 +79,14 @@ export default function SignUpPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-tsunami-blue-50 via-white to-tsunami-green-50 p-4">
+    <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-tsunami-blue-50 via-white to-tsunami-green-50 p-4">
       <div className="w-full max-w-md">
-        <Card className="shadow-2xl border-0">
-          <CardHeader className="space-y-4 text-center pb-6">
-            <div className="mx-auto w-20 h-20 bg-gradient-to-br from-tsunami-blue-500 to-tsunami-green-500 rounded-full flex items-center justify-center shadow-lg">
+        <Card className="border-0 shadow-2xl">
+          <CardHeader className="space-y-4 pb-6 text-center">
+            <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-gradient-to-br from-tsunami-blue-500 to-tsunami-green-500 shadow-lg">
               <span className="text-3xl">🌊</span>
             </div>
-            <CardTitle className="text-2xl font-bold bg-gradient-to-r from-tsunami-blue-600 to-tsunami-green-600 bg-clip-text text-transparent">
+            <CardTitle className="bg-gradient-to-r from-tsunami-blue-600 to-tsunami-green-600 bg-clip-text text-2xl font-bold text-transparent">
               Create Account
             </CardTitle>
             <CardDescription className="text-base">
@@ -106,7 +106,7 @@ export default function SignUpPage() {
             <Button
               type="button"
               variant="outline"
-              className="w-full h-12 text-base border-2 hover:bg-gray-50 transition-all duration-200"
+              className="h-12 w-full border-2 text-base transition-all duration-200 hover:bg-gray-50"
               onClick={handleGoogleSignUp}
               disabled={loading}
             >
@@ -123,7 +123,7 @@ export default function SignUpPage() {
                 <Separator />
               </div>
               <div className="relative flex justify-center text-xs uppercase">
-                <span className="bg-white px-2 text-muted-foreground font-medium">
+                <span className="bg-white px-2 font-medium text-muted-foreground">
                   Or continue with email
                 </span>
               </div>
@@ -197,7 +197,7 @@ export default function SignUpPage() {
 
               <Button
                 type="submit"
-                className="w-full h-12 text-base bg-gradient-to-r from-tsunami-blue-600 to-tsunami-green-600 hover:from-tsunami-blue-700 hover:to-tsunami-green-700 transition-all duration-200"
+                className="h-12 w-full bg-gradient-to-r from-tsunami-blue-600 to-tsunami-green-600 text-base transition-all duration-200 hover:from-tsunami-blue-700 hover:to-tsunami-green-700"
                 disabled={loading}
               >
                 {loading ? (
@@ -211,12 +211,12 @@ export default function SignUpPage() {
               </Button>
             </form>
 
-            <div className="text-center pt-4">
+            <div className="pt-4 text-center">
               <p className="text-sm text-muted-foreground">
                 Already have an account?{' '}
                 <Link
                   href="/auth/signin"
-                  className="font-medium text-tsunami-blue-600 hover:text-tsunami-blue-700 transition-colors"
+                  className="font-medium text-tsunami-blue-600 transition-colors hover:text-tsunami-blue-700"
                 >
                   Sign in here
                 </Link>

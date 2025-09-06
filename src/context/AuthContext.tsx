@@ -1,13 +1,7 @@
 'use client';
 
 import { onAuthStateChanged, User } from 'firebase/auth';
-import {
-  ReactNode,
-  createContext,
-  useContext,
-  useEffect,
-  useState,
-} from 'react';
+import { ReactNode, createContext, useContext, useEffect, useState } from 'react';
 import { auth, hasFirebaseConfig } from '@/lib/firebase';
 import { getUserProfile, UserProfile } from '@/lib/firebase-auth';
 
@@ -57,9 +51,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
     const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
       clearTimeout(timeoutId); // Clear timeout since we got a response
-      
+
       setUser(currentUser);
-      
+
       if (currentUser && hasFirebaseConfig) {
         try {
           const profile = await getUserProfile(currentUser.uid);
@@ -71,7 +65,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       } else {
         setUserProfile(null);
       }
-      
+
       setLoading(false);
     });
 
@@ -82,12 +76,12 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }, []);
 
   return (
-    <AuthContext.Provider 
-      value={{ 
-        user, 
-        userProfile, 
-        loading, 
-        refreshUserProfile 
+    <AuthContext.Provider
+      value={{
+        user,
+        userProfile,
+        loading,
+        refreshUserProfile,
       }}
     >
       {children}
@@ -106,7 +100,7 @@ export const useAuth = () => {
 // Custom hook for checking authentication status
 export const useRequireAuth = () => {
   const { user, loading } = useAuth();
-  
+
   useEffect(() => {
     if (!loading && !user) {
       // Redirect to login page
@@ -120,9 +114,9 @@ export const useRequireAuth = () => {
 // Custom hook for role-based access control
 export const useRequireRole = (requiredRoles: string[]) => {
   const { user, userProfile, loading } = useAuth();
-  
+
   const hasRequiredRole = userProfile?.role && requiredRoles.includes(userProfile.role);
-  
+
   useEffect(() => {
     if (!loading && (!user || !hasRequiredRole)) {
       // Redirect to unauthorized page or login

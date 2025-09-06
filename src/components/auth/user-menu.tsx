@@ -16,15 +16,7 @@ import {
 import { Button } from '@/components/ui/button';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
-import { 
-  User, 
-  Settings, 
-  LogOut, 
-  Shield,
-  Bell,
-  HelpCircle,
-  Loader2
-} from 'lucide-react';
+import { User, Settings, LogOut, Shield, Bell, HelpCircle, Loader2 } from 'lucide-react';
 import { getInitials } from '@/lib/utils';
 
 export function UserMenu() {
@@ -33,16 +25,24 @@ export function UserMenu() {
   const [isLoggingOut, setIsLoggingOut] = useState(false);
 
   // Create demo user when Firebase is not configured
-  const displayUser = user || (!hasFirebaseConfig ? {
-    displayName: 'Demo User',
-    email: 'demo@tsunami-alert.com',
-    photoURL: null
-  } : null);
+  const displayUser =
+    user ||
+    (!hasFirebaseConfig
+      ? {
+          displayName: 'Demo User',
+          email: 'demo@tsunami-alert.com',
+          photoURL: null,
+        }
+      : null);
 
-  const displayProfile = userProfile || (!hasFirebaseConfig ? {
-    role: 'ADMIN',
-    isActive: true
-  } : null);
+  const displayProfile =
+    userProfile ||
+    (!hasFirebaseConfig
+      ? {
+          role: 'ADMIN',
+          isActive: true,
+        }
+      : null);
 
   const handleLogout = async () => {
     setIsLoggingOut(true);
@@ -85,9 +85,9 @@ export function UserMenu() {
       <DropdownMenuTrigger asChild>
         <Button variant="ghost" className="relative h-10 w-10 rounded-full">
           <Avatar className="h-10 w-10">
-            <AvatarImage 
-              src={displayUser.photoURL || ''} 
-              alt={displayUser.displayName || displayUser.email || 'User'} 
+            <AvatarImage
+              src={displayUser.photoURL || ''}
+              alt={displayUser.displayName || displayUser.email || 'User'}
             />
             <AvatarFallback className="bg-gradient-to-br from-tsunami-blue-500 to-tsunami-green-500 text-white">
               {getInitials(displayUser.displayName || displayUser.email || 'U')}
@@ -104,56 +104,39 @@ export function UserMenu() {
                 {displayUser.displayName || 'User'}
               </p>
               {displayProfile?.role && (
-                <Badge 
-                  variant={getRoleBadgeVariant(displayProfile.role)}
-                  className="text-xs"
-                >
+                <Badge variant={getRoleBadgeVariant(displayProfile.role)} className="text-xs">
                   {displayProfile.role}
                 </Badge>
               )}
               {!hasFirebaseConfig && (
-                <Badge variant="outline" className="text-xs text-orange-600 border-orange-300">
+                <Badge variant="outline" className="border-orange-300 text-xs text-orange-600">
                   DEMO
                 </Badge>
               )}
             </div>
-            <p className="text-xs leading-none text-muted-foreground">
-              {displayUser.email}
-            </p>
+            <p className="text-xs leading-none text-muted-foreground">{displayUser.email}</p>
           </div>
         </DropdownMenuLabel>
 
         <DropdownMenuSeparator />
 
-        <DropdownMenuItem 
-          onClick={() => router.push('/profile')}
-          className="cursor-pointer"
-        >
+        <DropdownMenuItem onClick={() => router.push('/profile')} className="cursor-pointer">
           <User className="mr-2 h-4 w-4" />
           <span>Profile</span>
         </DropdownMenuItem>
 
-        <DropdownMenuItem 
-          onClick={() => router.push('/settings')}
-          className="cursor-pointer"
-        >
+        <DropdownMenuItem onClick={() => router.push('/settings')} className="cursor-pointer">
           <Settings className="mr-2 h-4 w-4" />
           <span>Settings</span>
         </DropdownMenuItem>
 
-        <DropdownMenuItem 
-          onClick={() => router.push('/notifications')}
-          className="cursor-pointer"
-        >
+        <DropdownMenuItem onClick={() => router.push('/notifications')} className="cursor-pointer">
           <Bell className="mr-2 h-4 w-4" />
           <span>Notifications</span>
         </DropdownMenuItem>
 
         {displayProfile?.role === 'ADMIN' && (
-          <DropdownMenuItem 
-            onClick={() => router.push('/admin')}
-            className="cursor-pointer"
-          >
+          <DropdownMenuItem onClick={() => router.push('/admin')} className="cursor-pointer">
             <Shield className="mr-2 h-4 w-4" />
             <span>Admin Panel</span>
           </DropdownMenuItem>
@@ -161,17 +144,14 @@ export function UserMenu() {
 
         <DropdownMenuSeparator />
 
-        <DropdownMenuItem 
-          onClick={() => router.push('/help')}
-          className="cursor-pointer"
-        >
+        <DropdownMenuItem onClick={() => router.push('/help')} className="cursor-pointer">
           <HelpCircle className="mr-2 h-4 w-4" />
           <span>Help & Support</span>
         </DropdownMenuItem>
 
         <DropdownMenuSeparator />
 
-        <DropdownMenuItem 
+        <DropdownMenuItem
           onClick={handleLogout}
           className="cursor-pointer text-red-600 focus:text-red-600"
           disabled={isLoggingOut}

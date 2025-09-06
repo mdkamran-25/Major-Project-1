@@ -43,11 +43,7 @@ export function formatRelativeTime(date: string | Date) {
   return formatDate(date);
 }
 
-export function calculateDisplacementMagnitude(
-  x: number,
-  y: number,
-  z: number
-): number {
+export function calculateDisplacementMagnitude(x: number, y: number, z: number): number {
   return Math.sqrt(x * x + y * y + z * z);
 }
 
@@ -139,7 +135,7 @@ export function copyToClipboard(text: string): Promise<void> {
     document.body.appendChild(textArea);
     textArea.focus();
     textArea.select();
-    
+
     return new Promise((resolve, reject) => {
       if (document.execCommand('copy')) {
         resolve();
@@ -152,8 +148,7 @@ export function copyToClipboard(text: string): Promise<void> {
 }
 
 export function generateId(): string {
-  return Math.random().toString(36).substring(2, 15) + 
-         Math.random().toString(36).substring(2, 15);
+  return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
 }
 
 export function isValidEmail(email: string): boolean {
@@ -171,9 +166,8 @@ export function isValidUrl(url: string): boolean {
 }
 
 export function sleep(ms: number): Promise<void> {
-  return new Promise(resolve => setTimeout(resolve, ms));
+  return new Promise((resolve) => setTimeout(resolve, ms));
 }
-
 
 export function truncateText(text: string, maxLength: number): string {
   if (text.length <= maxLength) return text;
@@ -187,7 +181,7 @@ export function capitalizeFirst(str: string): string {
 export function kebabToTitle(str: string): string {
   return str
     .split('-')
-    .map(word => capitalizeFirst(word))
+    .map((word) => capitalizeFirst(word))
     .join(' ');
 }
 
@@ -208,7 +202,7 @@ export function getRandomColor(): string {
 export function getInitials(name: string): string {
   return name
     .split(' ')
-    .map(word => word.charAt(0).toUpperCase())
+    .map((word) => word.charAt(0).toUpperCase())
     .join('')
     .slice(0, 2);
 }

@@ -93,7 +93,7 @@ export function DataSubscription({
             title: 'GPS Anomaly Detected',
             description: (
               <div className="flex items-center space-x-2">
-                <MapPin className="w-5 h-5 text-orange-500" />
+                <MapPin className="h-5 w-5 text-orange-500" />
                 <span>{`Station ${reading.stationId} (${reading.station.name}) reporting ${reading.magnitude.toFixed(1)}mm displacement`}</span>
               </div>
             ),
@@ -117,7 +117,7 @@ export function DataSubscription({
             title: 'Satellite Anomaly Detected',
             description: (
               <div className="flex items-center space-x-2">
-                <Satellite className="w-5 h-5 text-red-500" />
+                <Satellite className="h-5 w-5 text-red-500" />
                 <span>{`High anomaly score (${(satelliteReading.anomalyScore * 100).toFixed(1)}%) detected in ${satelliteReading.region}`}</span>
               </div>
             ),
@@ -141,7 +141,7 @@ export function DataSubscription({
             title: 'System Health Alert',
             description: (
               <div className="flex items-center space-x-2">
-                <Activity className="w-5 h-5 text-yellow-500" />
+                <Activity className="h-5 w-5 text-yellow-500" />
                 <span>{`System status changed to ${health.overallStatus}`}</span>
               </div>
             ),

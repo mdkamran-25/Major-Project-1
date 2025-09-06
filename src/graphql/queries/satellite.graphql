@@ -1,4 +1,7 @@
-query GetSatelliteData($filter: SatelliteDataFilter, $pagination: PaginationInput) {
+query GetSatelliteData(
+  $filter: SatelliteDataFilter
+  $pagination: PaginationInput
+) {
   satelliteData(filter: $filter, pagination: $pagination) {
     nodes {
       id

@@ -6,8 +6,8 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { 
-  BarChart3, 
+import {
+  BarChart3,
   TrendingUp,
   TrendingDown,
   Download,
@@ -21,7 +21,7 @@ import {
   Clock,
   Database,
   PieChart,
-  LineChart
+  LineChart,
 } from 'lucide-react';
 
 // Mock analytics data
@@ -31,20 +31,20 @@ const mockAnalytics = {
     alertsThisMonth: 8,
     avgResponseTime: 28,
     systemUptime: 99.8,
-    dataQuality: 95.2
+    dataQuality: 95.2,
   },
   gpsMetrics: {
     totalStations: 12,
     activeStations: 11,
     avgDisplacement: 2.4,
     anomalousReadings: 3,
-    dataPointsToday: 1440
+    dataPointsToday: 1440,
   },
   satelliteMetrics: {
     imagesProcessed: 48,
     avgAnomalyScore: 0.23,
     processingTime: 2.1,
-    storageUsed: 78.5
+    storageUsed: 78.5,
   },
   alertTrends: [
     { month: 'Jan', safe: 28, watch: 2, warning: 1, alert: 0 },
@@ -52,8 +52,8 @@ const mockAnalytics = {
     { month: 'Mar', safe: 30, watch: 1, warning: 0, alert: 0 },
     { month: 'Apr', safe: 27, watch: 3, warning: 1, alert: 0 },
     { month: 'May', safe: 29, watch: 2, warning: 0, alert: 0 },
-    { month: 'Jun', safe: 26, watch: 3, warning: 2, alert: 0 }
-  ]
+    { month: 'Jun', safe: 26, watch: 3, warning: 2, alert: 0 },
+  ],
 };
 
 export default function AnalyticsPage() {
@@ -64,7 +64,7 @@ export default function AnalyticsPage() {
   const handleRefresh = async () => {
     setIsRefreshing(true);
     // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 1000));
+    await new Promise((resolve) => setTimeout(resolve, 1000));
     setIsRefreshing(false);
   };
 
@@ -85,14 +85,10 @@ export default function AnalyticsPage() {
       <div className="p-4 lg:p-8">
         {/* Header */}
         <div className="mb-8">
-          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+          <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
             <div>
-              <h1 className="text-2xl lg:text-3xl font-bold text-gray-900">
-                Analytics & Reports
-              </h1>
-              <p className="text-gray-600 mt-1">
-                System performance metrics and trend analysis
-              </p>
+              <h1 className="text-2xl font-bold text-gray-900 lg:text-3xl">Analytics & Reports</h1>
+              <p className="mt-1 text-gray-600">System performance metrics and trend analysis</p>
             </div>
             <div className="flex items-center space-x-2">
               <select
@@ -105,17 +101,12 @@ export default function AnalyticsPage() {
                 <option value="90d">Last 90 days</option>
                 <option value="1y">Last year</option>
               </select>
-              <Button 
-                variant="outline" 
-                size="sm"
-                onClick={handleRefresh}
-                disabled={isRefreshing}
-              >
-                <RefreshCw className={`h-4 w-4 mr-2 ${isRefreshing ? 'animate-spin' : ''}`} />
+              <Button variant="outline" size="sm" onClick={handleRefresh} disabled={isRefreshing}>
+                <RefreshCw className={`mr-2 h-4 w-4 ${isRefreshing ? 'animate-spin' : ''}`} />
                 Refresh
               </Button>
               <Button variant="outline" size="sm">
-                <Download className="h-4 w-4 mr-2" />
+                <Download className="mr-2 h-4 w-4" />
                 Export
               </Button>
             </div>
@@ -123,7 +114,7 @@ export default function AnalyticsPage() {
         </div>
 
         {/* Key Metrics Overview */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 mb-8">
+        <div className="mb-8 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-5">
           <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium">Total Alerts</CardTitle>
@@ -214,7 +205,7 @@ export default function AnalyticsPage() {
           </TabsList>
 
           <TabsContent value="overview" className="space-y-6">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
               {/* Alert Trends Chart */}
               <Card>
                 <CardHeader>
@@ -222,16 +213,14 @@ export default function AnalyticsPage() {
                     <BarChart3 className="h-5 w-5 text-tsunami-blue-600" />
                     <span>Alert Trends</span>
                   </CardTitle>
-                  <CardDescription>
-                    Monthly alert distribution by severity level
-                  </CardDescription>
+                  <CardDescription>Monthly alert distribution by severity level</CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <div className="w-full h-64 bg-gray-100 rounded-lg flex items-center justify-center">
+                  <div className="flex h-64 w-full items-center justify-center rounded-lg bg-gray-100">
                     <div className="text-center">
-                      <BarChart3 className="h-8 w-8 text-gray-400 mx-auto mb-2" />
+                      <BarChart3 className="mx-auto mb-2 h-8 w-8 text-gray-400" />
                       <p className="text-gray-500">Alert trends chart will be displayed here</p>
-                      <p className="text-xs text-gray-400 mt-1">Using Recharts for visualization</p>
+                      <p className="mt-1 text-xs text-gray-400">Using Recharts for visualization</p>
                     </div>
                   </div>
                 </CardContent>
@@ -244,16 +233,14 @@ export default function AnalyticsPage() {
                     <Activity className="h-5 w-5 text-tsunami-green-600" />
                     <span>System Performance</span>
                   </CardTitle>
-                  <CardDescription>
-                    Response times and uptime metrics
-                  </CardDescription>
+                  <CardDescription>Response times and uptime metrics</CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <div className="w-full h-64 bg-gray-100 rounded-lg flex items-center justify-center">
+                  <div className="flex h-64 w-full items-center justify-center rounded-lg bg-gray-100">
                     <div className="text-center">
-                      <LineChart className="h-8 w-8 text-gray-400 mx-auto mb-2" />
+                      <LineChart className="mx-auto mb-2 h-8 w-8 text-gray-400" />
                       <p className="text-gray-500">Performance metrics chart</p>
-                      <p className="text-xs text-gray-400 mt-1">Real-time system monitoring</p>
+                      <p className="mt-1 text-xs text-gray-400">Real-time system monitoring</p>
                     </div>
                   </div>
                 </CardContent>
@@ -264,65 +251,80 @@ export default function AnalyticsPage() {
             <Card>
               <CardHeader>
                 <CardTitle>System Summary</CardTitle>
-                <CardDescription>
-                  Comprehensive overview of all system components
-                </CardDescription>
+                <CardDescription>Comprehensive overview of all system components</CardDescription>
               </CardHeader>
               <CardContent>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
                   <div className="space-y-3">
-                    <h4 className="font-semibold text-tsunami-blue-600 flex items-center">
-                      <MapPin className="h-4 w-4 mr-2" />
+                    <h4 className="flex items-center font-semibold text-tsunami-blue-600">
+                      <MapPin className="mr-2 h-4 w-4" />
                       GPS Monitoring
                     </h4>
                     <div className="space-y-2 text-sm">
                       <div className="flex justify-between">
                         <span className="text-gray-600">Active Stations:</span>
-                        <span className="font-medium">{mockAnalytics.gpsMetrics.activeStations}/{mockAnalytics.gpsMetrics.totalStations}</span>
+                        <span className="font-medium">
+                          {mockAnalytics.gpsMetrics.activeStations}/
+                          {mockAnalytics.gpsMetrics.totalStations}
+                        </span>
                       </div>
                       <div className="flex justify-between">
                         <span className="text-gray-600">Avg Displacement:</span>
-                        <span className="font-medium">{mockAnalytics.gpsMetrics.avgDisplacement}mm</span>
+                        <span className="font-medium">
+                          {mockAnalytics.gpsMetrics.avgDisplacement}mm
+                        </span>
                       </div>
                       <div className="flex justify-between">
                         <span className="text-gray-600">Data Points Today:</span>
-                        <span className="font-medium">{mockAnalytics.gpsMetrics.dataPointsToday.toLocaleString()}</span>
+                        <span className="font-medium">
+                          {mockAnalytics.gpsMetrics.dataPointsToday.toLocaleString()}
+                        </span>
                       </div>
                       <div className="flex justify-between">
                         <span className="text-gray-600">Anomalous Readings:</span>
-                        <span className="font-medium text-yellow-600">{mockAnalytics.gpsMetrics.anomalousReadings}</span>
+                        <span className="font-medium text-yellow-600">
+                          {mockAnalytics.gpsMetrics.anomalousReadings}
+                        </span>
                       </div>
                     </div>
                   </div>
 
                   <div className="space-y-3">
-                    <h4 className="font-semibold text-tsunami-green-600 flex items-center">
-                      <Satellite className="h-4 w-4 mr-2" />
+                    <h4 className="flex items-center font-semibold text-tsunami-green-600">
+                      <Satellite className="mr-2 h-4 w-4" />
                       Satellite Analysis
                     </h4>
                     <div className="space-y-2 text-sm">
                       <div className="flex justify-between">
                         <span className="text-gray-600">Images Processed:</span>
-                        <span className="font-medium">{mockAnalytics.satelliteMetrics.imagesProcessed}</span>
+                        <span className="font-medium">
+                          {mockAnalytics.satelliteMetrics.imagesProcessed}
+                        </span>
                       </div>
                       <div className="flex justify-between">
                         <span className="text-gray-600">Avg Anomaly Score:</span>
-                        <span className="font-medium">{(mockAnalytics.satelliteMetrics.avgAnomalyScore * 100).toFixed(1)}%</span>
+                        <span className="font-medium">
+                          {(mockAnalytics.satelliteMetrics.avgAnomalyScore * 100).toFixed(1)}%
+                        </span>
                       </div>
                       <div className="flex justify-between">
                         <span className="text-gray-600">Processing Time:</span>
-                        <span className="font-medium">{mockAnalytics.satelliteMetrics.processingTime}s</span>
+                        <span className="font-medium">
+                          {mockAnalytics.satelliteMetrics.processingTime}s
+                        </span>
                       </div>
                       <div className="flex justify-between">
                         <span className="text-gray-600">Storage Used:</span>
-                        <span className="font-medium text-orange-600">{mockAnalytics.satelliteMetrics.storageUsed}%</span>
+                        <span className="font-medium text-orange-600">
+                          {mockAnalytics.satelliteMetrics.storageUsed}%
+                        </span>
                       </div>
                     </div>
                   </div>
 
                   <div className="space-y-3">
-                    <h4 className="font-semibold text-tsunami-red-600 flex items-center">
-                      <AlertTriangle className="h-4 w-4 mr-2" />
+                    <h4 className="flex items-center font-semibold text-tsunami-red-600">
+                      <AlertTriangle className="mr-2 h-4 w-4" />
                       Alert System
                     </h4>
                     <div className="space-y-2 text-sm">
@@ -332,11 +334,15 @@ export default function AnalyticsPage() {
                       </div>
                       <div className="flex justify-between">
                         <span className="text-gray-600">This Month:</span>
-                        <span className="font-medium">{mockAnalytics.overview.alertsThisMonth}</span>
+                        <span className="font-medium">
+                          {mockAnalytics.overview.alertsThisMonth}
+                        </span>
                       </div>
                       <div className="flex justify-between">
                         <span className="text-gray-600">Avg Response:</span>
-                        <span className="font-medium">{mockAnalytics.overview.avgResponseTime}s</span>
+                        <span className="font-medium">
+                          {mockAnalytics.overview.avgResponseTime}s
+                        </span>
                       </div>
                       <div className="flex justify-between">
                         <span className="text-gray-600">Success Rate:</span>
@@ -350,18 +356,16 @@ export default function AnalyticsPage() {
           </TabsContent>
 
           <TabsContent value="gps" className="space-y-6">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
               <Card>
                 <CardHeader>
                   <CardTitle>GPS Station Performance</CardTitle>
-                  <CardDescription>
-                    Individual station metrics and reliability
-                  </CardDescription>
+                  <CardDescription>Individual station metrics and reliability</CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <div className="w-full h-64 bg-gray-100 rounded-lg flex items-center justify-center">
+                  <div className="flex h-64 w-full items-center justify-center rounded-lg bg-gray-100">
                     <div className="text-center">
-                      <MapPin className="h-8 w-8 text-gray-400 mx-auto mb-2" />
+                      <MapPin className="mx-auto mb-2 h-8 w-8 text-gray-400" />
                       <p className="text-gray-500">GPS station performance chart</p>
                     </div>
                   </div>
@@ -371,14 +375,12 @@ export default function AnalyticsPage() {
               <Card>
                 <CardHeader>
                   <CardTitle>Displacement Patterns</CardTitle>
-                  <CardDescription>
-                    Historical displacement trends and anomalies
-                  </CardDescription>
+                  <CardDescription>Historical displacement trends and anomalies</CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <div className="w-full h-64 bg-gray-100 rounded-lg flex items-center justify-center">
+                  <div className="flex h-64 w-full items-center justify-center rounded-lg bg-gray-100">
                     <div className="text-center">
-                      <TrendingUp className="h-8 w-8 text-gray-400 mx-auto mb-2" />
+                      <TrendingUp className="mx-auto mb-2 h-8 w-8 text-gray-400" />
                       <p className="text-gray-500">Displacement pattern analysis</p>
                     </div>
                   </div>
@@ -394,9 +396,14 @@ export default function AnalyticsPage() {
               <CardContent>
                 <div className="space-y-3">
                   {['ALBH', 'NANO', 'UCLU', 'BAMF'].map((stationId, index) => (
-                    <div key={stationId} className="flex items-center justify-between p-3 border rounded-lg">
+                    <div
+                      key={stationId}
+                      className="flex items-center justify-between rounded-lg border p-3"
+                    >
                       <div className="flex items-center space-x-3">
-                        <div className={`w-3 h-3 rounded-full ${index < 3 ? 'bg-green-500' : 'bg-red-500'}`} />
+                        <div
+                          className={`h-3 w-3 rounded-full ${index < 3 ? 'bg-green-500' : 'bg-red-500'}`}
+                        />
                         <div>
                           <p className="font-medium">{stationId}</p>
                           <p className="text-sm text-gray-500">
@@ -405,9 +412,7 @@ export default function AnalyticsPage() {
                         </div>
                       </div>
                       <div className="text-right">
-                        <p className="text-sm font-medium">
-                          {index < 3 ? '99.5%' : '0%'} uptime
-                        </p>
+                        <p className="text-sm font-medium">{index < 3 ? '99.5%' : '0%'} uptime</p>
                         <p className="text-xs text-gray-500">
                           {index < 3 ? 'Excellent' : 'Needs attention'}
                         </p>
@@ -420,18 +425,16 @@ export default function AnalyticsPage() {
           </TabsContent>
 
           <TabsContent value="satellite" className="space-y-6">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
               <Card>
                 <CardHeader>
                   <CardTitle>Processing Metrics</CardTitle>
-                  <CardDescription>
-                    Image processing performance and throughput
-                  </CardDescription>
+                  <CardDescription>Image processing performance and throughput</CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <div className="w-full h-64 bg-gray-100 rounded-lg flex items-center justify-center">
+                  <div className="flex h-64 w-full items-center justify-center rounded-lg bg-gray-100">
                     <div className="text-center">
-                      <Satellite className="h-8 w-8 text-gray-400 mx-auto mb-2" />
+                      <Satellite className="mx-auto mb-2 h-8 w-8 text-gray-400" />
                       <p className="text-gray-500">Processing metrics chart</p>
                     </div>
                   </div>
@@ -441,14 +444,12 @@ export default function AnalyticsPage() {
               <Card>
                 <CardHeader>
                   <CardTitle>Anomaly Detection</CardTitle>
-                  <CardDescription>
-                    Anomaly scores and detection accuracy
-                  </CardDescription>
+                  <CardDescription>Anomaly scores and detection accuracy</CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <div className="w-full h-64 bg-gray-100 rounded-lg flex items-center justify-center">
+                  <div className="flex h-64 w-full items-center justify-center rounded-lg bg-gray-100">
                     <div className="text-center">
-                      <PieChart className="h-8 w-8 text-gray-400 mx-auto mb-2" />
+                      <PieChart className="mx-auto mb-2 h-8 w-8 text-gray-400" />
                       <p className="text-gray-500">Anomaly detection chart</p>
                     </div>
                   </div>
@@ -458,18 +459,16 @@ export default function AnalyticsPage() {
           </TabsContent>
 
           <TabsContent value="alerts" className="space-y-6">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
               <Card>
                 <CardHeader>
                   <CardTitle>Alert Distribution</CardTitle>
-                  <CardDescription>
-                    Breakdown of alerts by severity level
-                  </CardDescription>
+                  <CardDescription>Breakdown of alerts by severity level</CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <div className="w-full h-64 bg-gray-100 rounded-lg flex items-center justify-center">
+                  <div className="flex h-64 w-full items-center justify-center rounded-lg bg-gray-100">
                     <div className="text-center">
-                      <PieChart className="h-8 w-8 text-gray-400 mx-auto mb-2" />
+                      <PieChart className="mx-auto mb-2 h-8 w-8 text-gray-400" />
                       <p className="text-gray-500">Alert distribution pie chart</p>
                     </div>
                   </div>
@@ -479,14 +478,12 @@ export default function AnalyticsPage() {
               <Card>
                 <CardHeader>
                   <CardTitle>Response Times</CardTitle>
-                  <CardDescription>
-                    Alert response and resolution times
-                  </CardDescription>
+                  <CardDescription>Alert response and resolution times</CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <div className="w-full h-64 bg-gray-100 rounded-lg flex items-center justify-center">
+                  <div className="flex h-64 w-full items-center justify-center rounded-lg bg-gray-100">
                     <div className="text-center">
-                      <Clock className="h-8 w-8 text-gray-400 mx-auto mb-2" />
+                      <Clock className="mx-auto mb-2 h-8 w-8 text-gray-400" />
                       <p className="text-gray-500">Response time trends</p>
                     </div>
                   </div>
@@ -500,26 +497,26 @@ export default function AnalyticsPage() {
                 <CardTitle>Alert Statistics</CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-                  <div className="text-center p-4 bg-green-50 rounded-lg">
+                <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
+                  <div className="rounded-lg bg-green-50 p-4 text-center">
                     <div className="text-2xl font-bold text-green-600">
                       {mockAnalytics.alertTrends.reduce((acc, month) => acc + month.safe, 0)}
                     </div>
                     <p className="text-sm text-gray-600">Safe Alerts</p>
                   </div>
-                  <div className="text-center p-4 bg-yellow-50 rounded-lg">
+                  <div className="rounded-lg bg-yellow-50 p-4 text-center">
                     <div className="text-2xl font-bold text-yellow-600">
                       {mockAnalytics.alertTrends.reduce((acc, month) => acc + month.watch, 0)}
                     </div>
                     <p className="text-sm text-gray-600">Watch Alerts</p>
                   </div>
-                  <div className="text-center p-4 bg-orange-50 rounded-lg">
+                  <div className="rounded-lg bg-orange-50 p-4 text-center">
                     <div className="text-2xl font-bold text-orange-600">
                       {mockAnalytics.alertTrends.reduce((acc, month) => acc + month.warning, 0)}
                     </div>
                     <p className="text-sm text-gray-600">Warning Alerts</p>
                   </div>
-                  <div className="text-center p-4 bg-red-50 rounded-lg">
+                  <div className="rounded-lg bg-red-50 p-4 text-center">
                     <div className="text-2xl font-bold text-red-600">
                       {mockAnalytics.alertTrends.reduce((acc, month) => acc + month.alert, 0)}
                     </div>
