@@ -47,7 +47,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     const timeoutId: NodeJS.Timeout = setTimeout(() => {
       console.warn('🔥 Auth state timeout, setting loading to false');
       setLoading(false);
-    }, 2000); // 2 second timeout (reduced from 5 seconds)
+    }, 8000); // 8 second timeout (increased for better user experience)
 
     const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
       clearTimeout(timeoutId); // Clear timeout since we got a response

@@ -16,19 +16,19 @@ export default function HomePage() {
     // Immediate redirect if Firebase not configured
     if (!hasFirebaseConfig) {
       console.warn('🔥 Firebase not configured, redirecting to dashboard');
-      router.replace('/dashboard');
+      window.location.href = '/dashboard';
       return;
     }
 
     // Set multiple timeouts to ensure redirect happens
     const timeout1 = setTimeout(() => {
       setRedirectTimeout(true);
-    }, 2000); // 2 second timeout
+    }, 5000); // 5 second timeout (increased)
 
     const timeout2 = setTimeout(() => {
-      console.warn('🚨 Force redirect after 4 seconds');
+      console.warn('🚨 Force redirect after 10 seconds');
       setForceRedirect(true);
-    }, 4000); // 4 second force redirect
+    }, 10000); // 10 second force redirect
 
     return () => {
       clearTimeout(timeout1);
@@ -37,10 +37,10 @@ export default function HomePage() {
   }, [router]);
 
   useEffect(() => {
-    // Force redirect logic
+    // Force redirect logic using window.location for guaranteed navigation
     if (forceRedirect) {
       console.warn('🚨 Forcing redirect to dashboard due to timeout');
-      router.replace('/dashboard');
+      window.location.href = '/dashboard';
       return;
     }
 
@@ -48,13 +48,14 @@ export default function HomePage() {
     if (!loading || redirectTimeout) {
       if (user) {
         console.log('✅ User authenticated, redirecting to dashboard');
-        router.replace('/dashboard');
+        // Use window.location for more reliable redirect
+        window.location.href = '/dashboard';
       } else {
         console.log('❌ No user, redirecting to signin');
-        router.replace('/auth/signin');
+        window.location.href = '/auth/signin';
       }
     }
-  }, [user, loading, redirectTimeout, forceRedirect, router]);
+  }, [user, loading, redirectTimeout, forceRedirect]);
 
   // Show loading while checking authentication
   return (
@@ -71,7 +72,10 @@ export default function HomePage() {
           <div className="mt-6 space-y-2">
             <p className="text-sm text-orange-600">Taking longer than expected?</p>
             <button
-              onClick={() => router.replace('/dashboard')}
+              onClick={() => {
+                console.log('🚨 Manual redirect to dashboard');
+                window.location.href = '/dashboard';
+              }}
               className="rounded-md bg-tsunami-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-tsunami-blue-700"
             >
               Continue to Dashboard
