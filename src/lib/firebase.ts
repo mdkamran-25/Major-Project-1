@@ -3,6 +3,7 @@ import { initializeApp } from 'firebase/app';
 import { getAuth } from 'firebase/auth';
 import { getFirestore } from 'firebase/firestore';
 import { getStorage } from 'firebase/storage';
+import { getAnalytics, isSupported } from 'firebase/analytics';
 
 // Check if Firebase environment variables are available
 const hasFirebaseConfig = !!(
@@ -28,7 +29,7 @@ const firebaseConfig = hasFirebaseConfig
       projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
       storageBucket:
         process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET ||
-        `${process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID}.appspot.com`,
+        `${process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID}.firebasestorage.app`,
       messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
       appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
       measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID,
@@ -40,12 +41,23 @@ let app: any;
 let auth: any;
 let db: any;
 let storage: any;
+let analytics: any;
 
 try {
   app = initializeApp(firebaseConfig);
   auth = getAuth(app);
   db = getFirestore(app);
   storage = getStorage(app);
+
+  // Initialize Analytics only in browser environment and if supported
+  if (typeof window !== 'undefined' && hasFirebaseConfig) {
+    isSupported().then((supported) => {
+      if (supported) {
+        analytics = getAnalytics(app);
+        console.log('🔥 Firebase Analytics initialized');
+      }
+    });
+  }
 
   if (!hasFirebaseConfig) {
     console.warn(
@@ -58,8 +70,9 @@ try {
   auth = null;
   db = null;
   storage = null;
+  analytics = null;
 }
 
 // Export Firebase services with null checks
-export { auth, db, storage, hasFirebaseConfig };
+export { auth, db, storage, analytics, hasFirebaseConfig };
 export default app;
